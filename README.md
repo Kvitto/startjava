@@ -1,4 +1,4 @@
-StartJava (Reload) Home Work
+StartJava Home Work
 ============================
 
 #### [Lesson 1]
