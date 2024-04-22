@@ -1,5 +1,8 @@
 public class VariableTheme {
     public static void main(String[] args) {
+        // 1. Вывод характеристик компьютера
+        System.out.println("1. Вывод характеристик компьютера");
+
         // битность процессора
         byte bitSize = 64;
 
@@ -24,8 +27,6 @@ public class VariableTheme {
         // Процессор AMD
         boolean isAmd = true;
 
-        // 1. Вывод характеристик компьютера
-        System.out.println("1. Вывод характеристик компьютера");
         System.out.println(isAmd + " производитель AMD");
         System.out.println(bitSize + "-х битный процессор");
         System.out.println(cpuFrequency + " Гц частота процессора");
@@ -34,6 +35,9 @@ public class VariableTheme {
         System.out.println(flashMemorySize + " МБайт флеш памяти");
         System.out.println(performanceFactor + " коэффициент производительности");
         System.out.println(batteryLife + "% ресурс аккумулятора");
+
+        // 2. Расчет стоимости товара со скидкой
+        System.out.println("\n2. Расчет стоимости товара со скидкой");
 
         // стоимость ручки, руб.
         double penPrice = 100;
@@ -44,8 +48,6 @@ public class VariableTheme {
         // размер скидки, %
         double discount = 11;
 
-        // 2. Расчет стоимости товара со скидкой
-        System.out.println("\n2. Расчет стоимости товара со скидкой");
         System.out.println(penPrice + bookPrice + " руб., общая стоимость товаров без скидки");
         System.out.println((penPrice + bookPrice) * discount / 100 + " руб., сумма скидки");
         System.out.println((penPrice + bookPrice) * (100 - discount) / 100 +
@@ -57,6 +59,9 @@ public class VariableTheme {
         System.out.println("   J   a a  v   v  a a");
         System.out.println("J  J  aaaaa  V V  aaaaa");
         System.out.println(" JJ  a     a  V  a     a");
+
+        // 4. Вывод min и max значений целых числовых типов
+        System.out.println("\n4. Вывод min и max значений целых числовых типов");
 
         // максимальное значение для типа byte
         byte byteMinMax = 127;
@@ -70,8 +75,6 @@ public class VariableTheme {
         // максимальное значение для типа long
         long longMinMax = 9223372036854775807L;
 
-        // 4. Вывод min и max значений целых числовых типов
-        System.out.println("\n4. Вывод min и max значений целых числовых типов");
         System.out.println(byteMinMax);
         System.out.println(++byteMinMax);
         System.out.println(--byteMinMax);
@@ -114,6 +117,9 @@ public class VariableTheme {
         firstNumber ^= secondNumber;
         System.out.println("Первое число = " + firstNumber + "\t Второе число = " + secondNumber);
 
+        // 6. Вывод символов и их кодов
+        System.out.println("\n6. Вывод символов и их кодов");
+
         // символ '$'
         char dollar = '$';
 
@@ -129,13 +135,14 @@ public class VariableTheme {
         // символ '~'
         char tilde = '~';
 
-        // 6. Вывод символов и их кодов
-        System.out.println("\n6. Вывод символов и их кодов");
         System.out.println((int) dollar + " " + dollar);
         System.out.println((int) asterisk + " " + asterisk);
         System.out.println((int) atSign + " " + atSign);
         System.out.println((int) verticaBar + " " + verticaBar);
         System.out.println((int) tilde + " " + tilde);
+
+        // 7. Вывод в консоль ASCII-арт Дюка
+        System.out.println("\n7. Вывод в консоль ASCII-арт Дюка");
 
         // символ '('
         char parenthesisLeft = '(';
@@ -152,8 +159,6 @@ public class VariableTheme {
         // символ '_'
         char underscore = '_';
 
-        // 7. Вывод в консоль ASCII-арт Дюка
-        System.out.println("\n7. Вывод в консоль ASCII-арт Дюка");
         System.out.println("    " + slash + backSlash);
         System.out.println("   " + slash + "  " + backSlash);
         System.out.println("  " + slash + underscore + parenthesisLeft + " " + parenthesisRight + backSlash);
