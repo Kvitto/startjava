@@ -47,7 +47,7 @@ public class CyclesTheme {
             }
         }
 
-        for (int i = maxNumber; i >= minNumber ; i--) {
+        for (int i = maxNumber; i >= minNumber; i--) {
             System.out.print(i + " ");
         }
         System.out.println();
@@ -64,7 +64,7 @@ public class CyclesTheme {
         // сумма реверсивного числа
         int sumReversNumber = 0;
 
-        while (srcNumber > 0 ) {
+        while (srcNumber > 0) {
             reversNumber *= 10;
             reversNumber += srcNumber % 10;
             sumReversNumber += srcNumber % 10;
@@ -146,7 +146,7 @@ public class CyclesTheme {
         while (lines > 0) {
             int cnt = lines;
 
-            while (cnt >0) {
+            while (cnt > 0) {
                 System.out.print("#");
                 cnt--;
             }

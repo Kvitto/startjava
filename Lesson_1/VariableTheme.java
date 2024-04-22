@@ -85,6 +85,9 @@ public class VariableTheme {
         System.out.println(++longMinMax);
         System.out.println(--longMinMax);
 
+        // 5. Перестановка значений переменных
+        System.out.println("\n5. Перестановка значений переменных");
+
         // первое число 2
         int firstNumber = 2;
 
@@ -94,8 +97,6 @@ public class VariableTheme {
         // буфер
         int buffer;
 
-        // 5. Перестановка значений переменных
-        System.out.println("\n5. Перестановка значений переменных");
         System.out.println("Первое число = " + firstNumber + "\t Второе число = " + secondNumber);
         System.out.println("Перестановка с помощью третьей переменной");
         buffer = firstNumber;
@@ -160,6 +161,9 @@ public class VariableTheme {
         System.out.println("" + slash + underscore + underscore + underscore + underscore + slash + 
                 backSlash + underscore + underscore + backSlash);
 
+        // 8. Вывод количества сотен, десятков и единиц числа
+        System.out.println("\n8. Вывод количества сотен, десятков и единиц числа");
+
         // сотни
         int hundreds;
 
@@ -170,10 +174,10 @@ public class VariableTheme {
         int units;
         
         // сумма
-        int sum;
+        int sum = 0;
 
         // произведение
-        int product;
+        int product = 0;
 
         // число
         int number = 123;
@@ -184,14 +188,18 @@ public class VariableTheme {
         sum = hundreds + tens + units;
         product = hundreds * tens * units;
 
-        // 8. Вывод количества сотен, десятков и единиц числа
-        System.out.println("\n8. Вывод количества сотен, десятков и единиц числа");
         System.out.println("Число N содержит:");
         System.out.println("  сотен - " + hundreds);
         System.out.println("  десятоков - " + tens);
         System.out.println("  единиц - " + units);
         System.out.println("Сумма его цифр = " + sum);
         System.out.println("Произведение = " + product);
+
+        // 9. Вывод времени
+        System.out.println("\n9. Вывод времени");
+
+        // время
+        int time = 86399;
 
         // часы
         int hours;
@@ -202,16 +210,11 @@ public class VariableTheme {
         // секунды
         int seconds;
 
-        // время
-        int time = 86399;
-
         hours = time / 3600;
         time %= 3600;
         minutes = time / 60;
         seconds = time % 60;
 
-        // 9. Вывод времени
-        System.out.println("\n9. Вывод времени");
         System.out.println(hours + ":" + minutes + ":" + seconds);
     }
 }

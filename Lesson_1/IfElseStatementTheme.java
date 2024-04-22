@@ -70,7 +70,7 @@ public class IfElseStatementTheme {
             } else {
                 System.out.print(testNumber + " является положительным и ");
             }
-            if (testNumber%2 == 0) {
+            if (testNumber % 2 == 0) {
                 System.out.println("четным");
             } else {
                 System.out.println("нечетным");
@@ -119,7 +119,7 @@ public class IfElseStatementTheme {
         System.out.println("\n5. Определение символа по его коду");
 
         // код символа
-        char code = '\u005E';
+        char code = '\u005E'
 
         if ((int) '0' <= (int) code && (int) code <= (int) '9') {
             System.out.println("Символ \"" + code + "\" является цифрой");
@@ -189,7 +189,7 @@ public class IfElseStatementTheme {
         System.out.println("История - " + historyGrade);
         System.out.println("Программирование - " + programmingGrade);
         System.out.println("Средний балл оценок по предметам - " + (double) (historyGrade +
-                programmingGrade) / 2 );
+                programmingGrade) / 2);
         System.out.println("Средний процент по предметам - " + (double) (historyPercent +
                 programmingPercent) / 2);
 
