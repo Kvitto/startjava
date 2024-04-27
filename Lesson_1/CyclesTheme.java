@@ -3,13 +3,8 @@ public class CyclesTheme {
         // 1. Подсчет суммы четных и нечетных чисел
         System.out.println("\n1. Подсчет суммы четных и нечетных чисел");
 
-        // четные
         int even = 0;
-
-        // не четные
         int odd = 0;
-
-        // итерация
         int iteration = -10;
 
         do {
@@ -25,13 +20,8 @@ public class CyclesTheme {
         // 2. Вывод чисел в порядке убывания
         System.out.println("\n2. Вывод чисел в порядке убывания");
 
-        // max число
         int maxNumber = -1;
-
-        // среднее число
         int centralNumber = 5;
-
-        // третье число
         int minNumber = 10;
 
         while (!(maxNumber > centralNumber && centralNumber > minNumber)) {
@@ -55,13 +45,8 @@ public class CyclesTheme {
         // 3. Вывод реверсивного числа и суммы его цифр
         System.out.println("\n3. Вывод реверсивного числа и суммы его цифр");
 
-        // исходлное число
         int srcNumber = 1234;
-
-        // реверсивное число
         int reversNumber = 0;
-
-        // сумма реверсивного числа
         int sumReversNumber = 0;
 
         while (srcNumber > 0) {
@@ -77,7 +62,6 @@ public class CyclesTheme {
         // 4. Вывод чисел в несколько строк
         System.out.println("\n4. Вывод чисел в несколько строк");
 
-        // счетчик столбцов
         int rows = 0;
 
         for (int i = 1; i < 24; i++) {
@@ -106,14 +90,9 @@ public class CyclesTheme {
         // 5. Проверка количества двоек числа на четность/нечетность
         System.out.println("\n5. Проверка количества двоек числа на четность/нечетность");
 
-        // исходное значение
-        srcNumber = 3242592;
-
-        // счетчик двоек
         int countTwo = 0;
-
-        // временное значение
         int tempVal = 0;
+        srcNumber = 3242592;
 
         System.out.print("В " + srcNumber);
 
@@ -132,6 +111,9 @@ public class CyclesTheme {
         // 6. Отображение геометрических фигур
         System.out.println("\n6. Отображение геометрических фигур");
 
+        int lines = 5;
+        int symbolNumber = 1;
+
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 10; j++) {
                 System.out.print("*");
@@ -139,9 +121,6 @@ public class CyclesTheme {
             System.out.println();
         }
         System.out.println();
-
-        // количество строк
-        int lines = 5;
 
         while (lines > 0) {
             int cnt = lines;
@@ -156,9 +135,6 @@ public class CyclesTheme {
         System.out.println();
 
         lines = 5;
-
-        // кол-во символов в строке
-        int symbolNumber = 1;
 
         do {
             int j = symbolNumber;

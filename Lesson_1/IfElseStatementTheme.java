@@ -3,8 +3,10 @@ public class IfElseStatementTheme {
         // 1. Перевод псевдокода на язык Java
         System.out.println("\n1. Перевод псевдокода на язык Java");
 
-        // Мужчина
         boolean male = false;
+        int age = 12;
+        double height = 2.05;
+        char firstLetterName = "Gary".charAt(0);
 
         if (!male) {
             System.out.println("Hi Darling!");
@@ -12,25 +14,18 @@ public class IfElseStatementTheme {
             System.out.println("Hi Man!");
         }
 
-        // Возраст
-        int age = 12;
-        
         if (age > 18) {
             System.out.println("Access permitted! 8)");
         } else {
             System.out.println("Access denied! 8(");
         }
 
-        // Рост
-        double height = 2.05;
-        
         if (height < 1.8) {
             System.out.println("Go ahead brave!");
         } else {
             System.out.println("WTF");
         }
 
-        char firstLetterName = "Gary".charAt(0);
         if (firstLetterName == 'M') {
             System.out.println("Hello Mary!");
         } else if (firstLetterName == 'I') {
@@ -42,24 +37,20 @@ public class IfElseStatementTheme {
         // 2. Поиск большего числа
         System.out.println("\n2. Поиск большего числа");
 
-        // переменная 1
-        int firstNumber = 5;
+        int a = 5;
+        int b = 5;
 
-        // переменная 2
-        int secondNumber = 5;
-
-        if (firstNumber > secondNumber) {
-            System.out.println("Число " + firstNumber + " больше " + secondNumber);
-        } else if (firstNumber < secondNumber) {
-            System.out.println("Число " + secondNumber + " больше " + firstNumber);
+        if (a > b) {
+            System.out.println("Число " + a + " больше " + b);
+        } else if (a < b) {
+            System.out.println("Число " + b + " больше " + a);
         } else {
-            System.out.println("Число " + firstNumber + " равно " + secondNumber);
+            System.out.println("Число " + a + " равно " + b);
         }
 
         // 3. Проверка числа
         System.out.println("\n3. Проверка числа");
 
-        // число для проверки
         int testNumber = 0;
 
         if (testNumber == 0) {
@@ -80,35 +71,27 @@ public class IfElseStatementTheme {
         // 4. Поиск одинаковых цифр в числах
         System.out.println("\n4. Поиск одинаковых цифр в числах");
 
-        // Первое число
-        firstNumber = 123;
-
-        // второе число
-        secondNumber = 223;
-
-        // цифры
         int digits = 0;
-
-        // разряды
         int ranks = 0;
+        testNumber = a - b;
 
-        // тестовое значение
-        testNumber = firstNumber - secondNumber;
+        a = 123;
+        b = 223;
 
         if (testNumber / 100 == 0 || (testNumber % 100) / 10 == 0 || testNumber % 10 == 0) {
             if (testNumber / 100 == 0) {
                 ranks = 3;
-                digits = firstNumber / 100;
+                digits = a / 100;
             }
             if ((testNumber % 100) / 10 == 0) {
                 ranks = ranks * 10 + 2;
-                digits = digits * 10 + (firstNumber % 100) / 10;
+                digits = digits * 10 + (a % 100) / 10;
             }
             if (testNumber % 10 == 0) {
                 ranks = ranks * 10 + 1;
-                digits = digits * 10 + firstNumber % 10;
+                digits = digits * 10 + a % 10;
             }
-            System.out.println("исходные числа: " + firstNumber + " " + secondNumber);
+            System.out.println("исходные числа: " + a + " " + b);
             System.out.println("одинаковые числа: " + digits);
             System.out.println("номера разрядов: " + ranks);
         } else {
@@ -118,7 +101,6 @@ public class IfElseStatementTheme {
         // 5. Определение символа по его коду
         System.out.println("\n5. Определение символа по его коду");
 
-        // код символа
         char code = '\u005E'
 
         if ((int) '0' <= (int) code && (int) code <= (int) '9') {
@@ -154,16 +136,9 @@ public class IfElseStatementTheme {
         // 7. Определение оценки по предметам
         System.out.println("\n7. Определение оценки по предметам");
 
-        // история %
         int historyPercent = 59;
-
-        // история балл
         int historyGrade = 0;
-
-        // программирование %
         int programmingPercent = 92;
-
-        // программирование балл
         int programmingGrade = 0;
 
         if (historyPercent <= 60) {
@@ -196,16 +171,9 @@ public class IfElseStatementTheme {
         // 8. Расчет годовой прибыли
         System.out.println("\n8. Расчет годовой прибыли");
 
-        // выручка
         int incomeMonth = 13000;
-
-        // аренда
         int rentMonth = 5000;
-
-        // себестоимость
         int netCost = 9000;
-
-        // итого в год
         int sum = (incomeMonth - rentMonth - netCost) * 12;
 
         if (sum > 0) {
