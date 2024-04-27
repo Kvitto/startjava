@@ -8,20 +8,20 @@ public class VariableNamesTheme {
         System.out.println("цифра = " + number);
 
         // сумма чисел
-        int numberSum = 34;
-        System.out.println("сумма чисел = " + numberSum);
+        int sumNumbers = 34;
+        System.out.println("сумма чисел = " + sumNumbers);
 
         // произведение цифр
-        int multiplicationOfNumbers = 45;
-        System.out.println("произведение цифр = " + multiplicationOfNumbers);
+        int productOfNumbers = 45;
+        System.out.println("произведение цифр = " + productOfNumbers);
 
         // максимальное число
         int maxNumber = 13;
         System.out.println("максимальное число = " + maxNumber);
 
         // количество десятков
-        int numberOgTen = 4;
-        System.out.println("количество десятков = " + numberOgTen);
+        int numberOfTen = 4;
+        System.out.println("количество десятков = " + numberOfTen);
 
         // вес собаки
         int dogWeight = 25;
@@ -32,12 +32,12 @@ public class VariableNamesTheme {
         System.out.println("исходное число = " + originalNumber);
 
         // процент по вкладу
-        int interestOfDeposit = 11;
-        System.out.println("процент по вкладу = " + interestOfDeposit);
+        int interestRate = 11;
+        System.out.println("процент по вкладу = " + interestRate);
 
         // переменная хранит символ &
-        char varStorySymbol = '&';
-        System.out.println("переменная хранит символ = " + varStorySymbol);
+        char ampersand = '&';
+        System.out.println("переменная хранит символ = " + ampersand);
 
         // код ошибки
         int errorCode = 6;
@@ -119,7 +119,6 @@ public class VariableNamesTheme {
         int numberOfNumbersInEachLine = 12;
         System.out.println("количество чисел в каждой строке = " + numberOfNumbersInEachLine);
 
-
         // 2. boolean-переменные
         System.out.println("\n2. boolean-переменные");
 
@@ -132,12 +131,12 @@ public class VariableNamesTheme {
         System.out.println("компьютер включен? = " + isOnComputer);
 
         // есть равные цифры?
-        boolean isEqualNumbers = true;
-        System.out.println("есть равные цифры? = " + isEqualNumbers);
+        boolean hasEqualNumbers = true;
+        System.out.println("есть равные цифры? = " + hasEqualNumbers);
 
         // создано?
-        boolean isExist = true;
-        System.out.println("создано? = " + isExist);
+        boolean isCreated = true;
+        System.out.println("создано? = " + isCreated);
 
         // пустое?
         boolean isEmpty = false;
@@ -159,37 +158,36 @@ public class VariableNamesTheme {
         boolean isUniqueStrings = true;
         System.out.println("имеются уникальные строки? = " + isUniqueStrings);
 
-
         // 3. Аббревиатуры
         System.out.println("\n3. Аббревиатуры");
 
         // старый universally unique identifier
-        String oldUniversallyUniqueIdentifier = "UUId";
-        System.out.println("старый universally unique identifier = " + oldUniversallyUniqueIdentifier);
+        String oldUuid = "UUId";
+        System.out.println("старый universally unique identifier = " + oldUuid);
 
         // производитель оперативной памяти
-        String memoryManufacturer = "Kingstone";
-        System.out.println("производитель оперативной памяти = " + memoryManufacturer);
+        String ramManufacturer = "Kingstone";
+        System.out.println("производитель оперативной памяти = " + ramManufacturer);
 
         // емкость жесткого диска
         String hddCapacity = "Hdd Cap";
         System.out.println("емкость жесткого диска = " + hddCapacity);
 
         // протокол передачи гипертекста
-        String hypertextTransferProtocol = "HTTP";
-        System.out.println("протокол передачи гипертекста = " + hypertextTransferProtocol);
+        String http = "HTTP";
+        System.out.println("протокол передачи гипертекста = " + http);
 
         // сокращенный uniform resource locator
-        String abbreviatedUniformResourceLocator = "URL";
+        String url = "URL";
         System.out.println("сокращенный uniform resource locator = " + abbreviatedUniformResourceLocator);
 
         // новый идентификатор клиента
-        String newClientId = "CID";
-        System.out.println("новый идентификатор клиента = " + newClientId);
+        String newCid = "CID";
+        System.out.println("новый идентификатор клиента = " + newCid);
 
         // кодировка american standard code for information interchange
-        String encodingAmericanStandardCodeForInformationInterchange = "ASCII";
-        System.out.println("кодировка american standard code for information interchange = " + 
-                encodingAmericanStandardCodeForInformationInterchange);
+        String ascii = "ASCII";
+        System.out.println("кодировка american standard code for information interchange = " +
+                ascii);
     }
 }
