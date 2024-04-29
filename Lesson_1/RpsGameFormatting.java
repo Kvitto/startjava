@@ -61,10 +61,11 @@ public class RpsGameFormatting {
             return;
         }
 
-        boolean isName1Equal = sign1.equals(rock) && sign2.equals(scissors) ||
-                sign1.equals(scissors) && sign2.equals(paper) || sign1.equals(paper) && sign2.equals(rock);
+        boolean isEqualName1 = sign1.equals(rock) && sign2.equals(scissors) ||
+                sign1.equals(scissors) && sign2.equals(paper) ||
+                sign1.equals(paper) && sign2.equals(rock);
 
-        if (isName1Equal) {
+        if (isEqualName1) {
             System.out.println("\nПобедил - " + name1);
         } else {
             System.out.println("\nПобедил - " + name2);

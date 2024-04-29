@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class VariableTheme {
     public static void main(String[] args) {
         // 1. Вывод характеристик компьютера
@@ -24,15 +27,17 @@ public class VariableTheme {
         // 2. Расчет стоимости товара со скидкой
         System.out.println("\n2. Расчет стоимости товара со скидкой");
 
-        double penPrice = 100;
-        double bookPrice = 200;
-        double discount = 11;
-        double tolalPrice = penPrice + bookPrice;
+        var penPrice =  new BigDecimal("105.5");
+        var bookPrice = new BigDecimal("235.83");
+        var discount = new BigDecimal("11");
+        var totalPrice = penPrice.add(bookPrice);
+        var oneHundred = new BigDecimal("100");
 
-        System.out.println(tolalPrice + " руб., общая стоимость товаров без скидки");
-        System.out.println((tolalPrice) * discount / 100 + " руб., сумма скидки");
-        System.out.println((tolalPrice) * (100 - discount) / 100 +
-                " руб., общая стоимость товаров со скидкой");
+        System.out.println(totalPrice + " руб., общая стоимость товаров без скидки");
+        System.out.println(discount.multiply(totalPrice)
+                .divide(oneHundred, 2, RoundingMode.HALF_UP) + " руб., сумма скидки");
+        System.out.println(totalPrice.multiply(oneHundred.subtract(discount))
+                .divide(oneHundred, 2, RoundingMode.HALF_UP) + " руб., общая стоимость товаров со скидкой");
 
         // 3. Вывод слова JAVA
         System.out.println("\n3. Вывод слова JAVA");
@@ -131,8 +136,8 @@ public class VariableTheme {
 
         int time = 86399;
         int hours = time / 3600;
-        int minutes = time % 60;
-        int seconds = time % 3600 % 60;
+        int minutes = time % 3600 / 60;
+        int seconds = time % 60;
 
         System.out.println(hours + ":" + minutes + ":" + seconds);
     }
