@@ -27,7 +27,7 @@ public class VariableTheme {
         // 2. Расчет стоимости товара со скидкой
         System.out.println("\n2. Расчет стоимости товара со скидкой");
 
-        var penPrice =  new BigDecimal("105.5");
+        var penPrice = new BigDecimal("105.5");
         var bookPrice = new BigDecimal("235.83");
         var discount = new BigDecimal("11");
         var totalPrice = penPrice.add(bookPrice);
