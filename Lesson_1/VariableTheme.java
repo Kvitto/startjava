@@ -1,5 +1,5 @@
+import java.math;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class VariableTheme {
     public static void main(String[] args) {
@@ -29,15 +29,14 @@ public class VariableTheme {
 
         var penPrice = new BigDecimal("105.5");
         var bookPrice = new BigDecimal("235.83");
-        var discount = new BigDecimal("11");
+        var discount = new BigDecimal("0.11");
         var totalPrice = penPrice.add(bookPrice);
-        var oneHundred = new BigDecimal("100");
 
         System.out.println(totalPrice + " руб., общая стоимость товаров без скидки");
-        System.out.println(discount.multiply(totalPrice)
-                .divide(oneHundred, 2, RoundingMode.HALF_UP) + " руб., сумма скидки");
-        System.out.println(totalPrice.multiply(oneHundred.subtract(discount))
-                .divide(oneHundred, 2, RoundingMode.HALF_UP) + " руб., общая стоимость товаров со скидкой");
+        System.out.println(totalPrice.multiply(discount)
+                .setScale(2, RoundingMode.HALF_UP) + " руб., сумма скидки");
+        System.out.println(totalPrice.multiply(BigDecimal.ONE.subtract(discount))
+                .setScale(2, RoundingMode.HALF_UP) + " руб., общая стоимость товаров со скидкой");
 
         // 3. Вывод слова JAVA
         System.out.println("\n3. Вывод слова JAVA");
