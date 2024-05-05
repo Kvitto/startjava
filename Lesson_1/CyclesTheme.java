@@ -28,18 +28,18 @@ public class CyclesTheme {
         // 2. Вывод чисел в порядке убывания
         System.out.println("\n2. Вывод чисел в порядке убывания");
 
-        from = -1;
-        to = 5;
-        int middle = 10;
-        int max = to;
-        int min = middle;
+        int a = -1;
+        int b = 5;
+        int c = 10;
+        int max = b;
+        int min = c;
 
-        if (middle >= to && to >= from) {
-            max = middle;
-            min = from;
-        } else if (from >= middle && middle >= to) {
-            max = from;
-            min = to;
+        if (c >= b && b >= a) {
+            max = c;
+            min = a;
+        } else if (a >= c && c >= b) {
+            max = a;
+            min = b;
         } 
 
         System.out.print("В интервале (" + min + "; " + max + ") находятся числа: ");
@@ -52,11 +52,10 @@ public class CyclesTheme {
 
         int srcNumber = 1234;
         int sumDigits = 0;
-        int digit;
 
         System.out.print("Число в обратном порядке - ");
         while (srcNumber > 0) {
-            digit = srcNumber % 10;
+            int digit = srcNumber % 10;
             System.out.print(digit);
             sumDigits += digit;
             srcNumber /= 10;
