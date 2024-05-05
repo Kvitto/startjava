@@ -179,7 +179,7 @@ public class VariableNamesTheme {
 
         // сокращенный uniform resource locator
         String url = "URL";
-        System.out.println("сокращенный uniform resource locator = " + abbreviatedUniformResourceLocator);
+        System.out.println("сокращенный uniform resource locator = " + url);
 
         // новый идентификатор клиента
         String newCid = "CID";
