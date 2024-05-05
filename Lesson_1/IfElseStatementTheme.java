@@ -130,9 +130,11 @@ public class IfElseStatementTheme {
             interestRate = BigDecimal.valueOf(0.07);
         }
         System.out.printf("Сумма вклада: %.2f %n", deposit);
-        System.out.printf("Сумма начисленного %%: %.2f %n", deposit.multiply(interestRate)
+        System.out.printf("Сумма начисленного %%: %.2f %n",
+                deposit.multiply(interestRate)
                 .setScale(2, RoundingMode.HALF_UP));
-        System.out.printf("Итоговая сумма с %%: %.2f %n", (deposit.add(deposit.multiply(interestRate))
+        System.out.printf("Итоговая сумма с %%: %.2f %n",
+                (deposit.add(deposit.multiply(interestRate))
                 .setScale(2, RoundingMode.HALF_UP)));
 
         // 7. Определение оценки по предметам
@@ -162,18 +164,20 @@ public class IfElseStatementTheme {
 
         System.out.println("История - " + historyGrade);
         System.out.println("Программирование - " + programmingGrade);
-        System.out.println("Средний балл оценок по предметам - " + (double) (historyGrade +
-                programmingGrade) / 2);
-        System.out.println("Средний процент по предметам - " + (double) (historyPercent +
-                programmingPercent) / 2);
+        System.out.println("Средний балл оценок по предметам - " +
+                (double) (historyGrade + programmingGrade) / 2);
+        System.out.println("Средний процент по предметам - " +
+                (double) (historyPercent + programmingPercent) / 2);
 
         // 8. Расчет годовой прибыли
         System.out.println("\n8. Расчет годовой прибыли");
 
-        var incomeMonth = new BigDecimal("13025.233") ;
+        var incomeMonth = new BigDecimal("13025.233");
         var rentMonth = new BigDecimal("5123.018");
         var netCost = new BigDecimal("9001.729");
-        var sum = incomeMonth.subtract(rentMonth).subtract(netCost).multiply(BigDecimal.valueOf(12))
+        var sum = incomeMonth.subtract(rentMonth)
+                .subtract(netCost)
+                .multiply(BigDecimal.valueOf(12))
                 .setScale(2, RoundingMode.HALF_UP);
 
         if (sum.compareTo(BigDecimal.ZERO) <= 0) {

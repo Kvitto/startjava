@@ -30,20 +30,17 @@ public class CyclesTheme {
 
         from = -1;
         to = 5;
-        int c = 10;
+        int middle = 10;
         int max = to;
-        int min = c;
+        int min = middle;
 
-        if (c >= to && to >= from) {
-            max = c;
+        if (middle >= to && to >= from) {
+            max = middle;
             min = from;
-        } else if (from >= c && c >= to) {
+        } else if (from >= middle && middle >= to) {
             max = from;
             min = to;
-        } else {
-            max = to;
-            min = c;
-        }
+        } 
 
         System.out.print("В интервале (" + min + "; " + max + ") находятся числа: ");
         for (int i = max - 1; i > min; i--) {
@@ -54,29 +51,29 @@ public class CyclesTheme {
         System.out.println("\n\n3. Вывод реверсивного числа и суммы его цифр");
 
         int srcNumber = 1234;
-        int sumReverseNumber = 0;
-        int modulo;
+        int sumDigits = 0;
+        int digit;
 
         System.out.print("Число в обратном порядке - ");
         while (srcNumber > 0) {
-            modulo = srcNumber % 10;
-            System.out.print(modulo);
-            sumReverseNumber += modulo;
+            digit = srcNumber % 10;
+            System.out.print(digit);
+            sumDigits += digit;
             srcNumber /= 10;
         }
 
-        System.out.println("\nСумма его цифр - " + sumReverseNumber);
+        System.out.println("\nСумма его цифр - " + sumDigits);
 
         // 4. Вывод чисел в несколько строк
         System.out.println("\n4. Вывод чисел в несколько строк");
 
-        int dataFrom = 1;
-        int dataTo = 24;
+        from = 1;
+        to = 24;
         int cols = 5;
 
-        for (int i = dataFrom; i < 30; ) {
+        for (int i = from; i < 30; ) {
             for (int j = 0; j < cols; j++) {
-                if (i < dataTo) {
+                if (i < to) {
                     System.out.printf("%3d", i);
                 } else {
                     System.out.printf("%3d", 0);
