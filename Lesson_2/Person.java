@@ -19,7 +19,7 @@ public class Person {
         System.out.println("бегу");
     }
 
-    void voice() {
+    void speak() {
         System.out.println("говорю");
     }
 
