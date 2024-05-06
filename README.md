@@ -13,4 +13,4 @@ StartJava Home Work
 
 #### [Lesson 2]
 
-- []()
+- [Создать класс Person](https://github.com/Kvitto/startjava/blob/main/Lesson_2/Person.java)
