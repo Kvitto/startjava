@@ -14,3 +14,4 @@ StartJava Home Work
 #### [Lesson 2]
 
 - [Создать класс Person](https://github.com/Kvitto/startjava/blob/main/Lesson_2/Person.java)
+- [Создать классы Wolf](Lesson_2/Wolf.java)[ и WolfTest](Lesson_2/WolfTest.java)
