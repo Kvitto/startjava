@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class GuessNumber {
     private Player player1;
     private Player player2;
-    private boolean nextPlayerFlag = false;
+    private boolean swapPlayer = false;
 
     public GuessNumber(Player player1, Player player2) {
         this.player1 = player1;
@@ -11,8 +11,8 @@ public class GuessNumber {
     }
 
     private Player nextPlayer() {
-        nextPlayerFlag = !nextPlayerFlag;
-        return nextPlayerFlag ? player1 : player2;
+        swapPlayer = !swapPlayer;
+        return swapPlayer ? player1 : player2;
     }
 
     public void play() {
