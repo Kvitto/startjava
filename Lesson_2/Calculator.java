@@ -15,32 +15,23 @@ public class Calculator {
         this.sign = sign;
     }
 
-    public void calculate() {
+    public String calculate() {
+        String result;
         switch (sign) {
-            case '+':
-                System.out.println(arg1 + arg2);
-                break;
-            case '-':
-                System.out.println(arg1 - arg2);
-                break;
-            case '*':
-                System.out.println(arg1 * arg2);
-                break;
-            case '/':
-                System.out.println(arg1 / arg2);
-                break;
-            case '%':
-                System.out.println(arg1 % arg2);
-                break;
-            case '^':
-                int result = 1;
+            case '+' -> result = String.valueOf(arg1 + arg2);
+            case '-' -> result = String.valueOf(arg1 - arg2);
+            case '*' -> result = String.valueOf(arg1 * arg2);
+            case '/' -> result = String.valueOf(arg1 / arg2);
+            case '%' -> result = String.valueOf(arg1 % arg2);
+            case '^' -> {
+                int caretResult = 1;
                 for (int i = 1; i <= arg2; i++) {
-                    result *= arg1;
+                    caretResult *= arg1;
                 }
-                System.out.println(result);
-                break;
-            default:
-                System.out.println("мат. операция не поддерживается");
+                result = String.valueOf(caretResult);
+            }
+            default -> result = "мат. операция не поддерживается";
         }
+        return result;
     }
 }
