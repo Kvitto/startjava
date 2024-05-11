@@ -15,7 +15,7 @@ public class Calculator {
         this.sign = sign;
     }
 
-    public String calculate() {
+    public void calculate() {
         String result;
         switch (sign) {
             case '+' -> result = String.valueOf(arg1 + arg2);
@@ -32,6 +32,6 @@ public class Calculator {
             }
             default -> result = "мат. операция не поддерживается";
         }
-        return result;
+        System.out.println(result);
     }
 }
