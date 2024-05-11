@@ -19,16 +19,17 @@ public class GuessNumber {
         int secretNum = (int) (Math.random() * 100 + 1);
         var scanner = new Scanner(System.in);
         Player player;
+        int playerNum;
         do {
             player = nextPlayer();
             System.out.printf("Игрок %s введите число от 1 до 100: ", player.getName());
-            player.setNumber(scanner.nextInt());
-            if (secretNum < player.getNumber()) {
-                System.out.printf("Число %d больше того, что загадал компьютер\n", player.getNumber());
-            } else if (secretNum > player.getNumber()) {
-                System.out.printf("Число %d меньше того, что загадал компьютер\n", player.getNumber());
+            playerNum = scanner.nextInt();
+            if (secretNum < playerNum) {
+                System.out.printf("Число %d больше того, что загадал компьютер\n", playerNum);
+            } else if (secretNum > playerNum) {
+                System.out.printf("Число %d меньше того, что загадал компьютер\n", playerNum);
             }
-        } while (secretNum != player.getNumber());
-        System.out.printf("Игрок %s победил(а)!\n", player.getName());
+        } while (secretNum != playerNum);
+        System.out.printf("Игрок %s победил(а)!!!\n", player.getName());
     }
 }
