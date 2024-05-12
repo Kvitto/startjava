@@ -12,11 +12,11 @@ public class GuessNumber {
     public void play() {
         int secretNum = (int) (Math.random() * 100 + 1);
         var scanner = new Scanner(System.in);
-        Player player = player2;
+        Player currentPlayer = null;
         int playerNum;
         do {
-            player = !player.equals(player1) ? player1 : player2;
-            System.out.printf("Игрок %s введите число от 1 до 100: ", player.getName());
+            currentPlayer = player1.equals(currentPlayer) ? player2 : player1;
+            System.out.printf("Игрок %s введите число от 1 до 100: ", currentPlayer.getName());
             playerNum = scanner.nextInt();
             if (secretNum < playerNum) {
                 System.out.printf("Число %d больше того, что загадал компьютер\n", playerNum);
@@ -24,6 +24,6 @@ public class GuessNumber {
                 System.out.printf("Число %d меньше того, что загадал компьютер\n", playerNum);
             }
         } while (secretNum != playerNum);
-        System.out.printf("Игрок %s победил(а)!!!\n", player.getName());
+        System.out.printf("Игрок %s победил(а)!!!\n", currentPlayer.getName());
     }
 }
