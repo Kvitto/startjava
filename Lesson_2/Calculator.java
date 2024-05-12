@@ -16,21 +16,26 @@ public class Calculator {
     }
 
     public void calculate() {
-        String result;
+        int result = 0;
         switch (sign) {
-            case '+' -> result = String.valueOf(arg1 + arg2);
-            case '-' -> result = String.valueOf(arg1 - arg2);
-            case '*' -> result = String.valueOf(arg1 * arg2);
-            case '/' -> result = String.valueOf(arg1 / arg2);
-            case '%' -> result = String.valueOf(arg1 % arg2);
-            case '^' -> {
-                int caretResult = 1;
-                for (int i = 1; i <= arg2; i++) {
-                    caretResult *= arg1;
-                }
-                result = String.valueOf(caretResult);
+            case '+' -> result = arg1 + arg2;
+            case '-' -> result = arg1 - arg2;
+            case '/' -> {
+                System.out.println((double) arg1 / arg2);
+                return;
             }
-            default -> result = "мат. операция не поддерживается";
+            case '*' -> result = arg1 * arg2;
+            case '%' -> result = arg1 % arg2;
+            case '^' -> {
+                result = 1;
+                for (int i = 1; i <= arg2; i++) {
+                    result *= arg1;
+                }
+            }
+            default -> {
+                System.out.println("мат. операция не поддерживается");
+                return;
+            }
         }
         System.out.println(result);
     }

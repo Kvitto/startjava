@@ -7,10 +7,10 @@ public class GuessNumberTest {
         var player1 = new Player(scanner.nextLine());
         System.out.print("Введите имя второго игрока: ");
         var player2 = new Player(scanner.nextLine());
-        var guessNumber = new GuessNumber(player1, player2);
+        var game = new GuessNumber(player1, player2);
         String choice;
         do {
-            guessNumber.play();
+            game.play();
             do {
                 System.out.print("Хотите продолжить игру? [yes/no]: ");
                 choice = scanner.next().toLowerCase();
