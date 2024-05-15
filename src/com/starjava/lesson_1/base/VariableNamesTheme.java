@@ -1,3 +1,5 @@
+package com.starjava.lesson_1.base;
+
 public class VariableNamesTheme {
     public static void main(String[] args) {
         // 1. Разные переменные

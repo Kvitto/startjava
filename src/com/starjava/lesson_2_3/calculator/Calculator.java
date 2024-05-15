@@ -1,3 +1,5 @@
+package com.starjava.lesson_2_3.calculator;
+
 public class Calculator {
     private int arg1;
     private int arg2;
