@@ -1,4 +1,4 @@
-package com.starjava.lesson_2_3.rps;
+package com.startjava.lesson_1.final_;
 
 import java.util.Random;
 

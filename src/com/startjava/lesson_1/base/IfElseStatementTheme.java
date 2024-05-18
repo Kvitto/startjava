@@ -1,4 +1,4 @@
-package com.starjava.lesson_1.base;
+package com.startjava.lesson_1.base;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
