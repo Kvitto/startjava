@@ -5,8 +5,7 @@ import java.util.Arrays;
 public class Reverse {
     public static void main(String[] args) {
         reverseArray(new int[]{});
-        int[] sequence = null;
-        reverseArray(sequence);
+        reverseArray(null);
         reverseArray(new int[]{6, 8, 9, 1});
         reverseArray(new int[]{13, 8, 5, 3, 2, 1, 1});
     }
