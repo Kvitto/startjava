@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class GallowsGame {
     private static final char[] userChars = new char[33];
     private static final String[] dictionary = {"ЛУК", "ТОПОР", "ВЕДРО", "САНИ", "ПЕЧКА"};
-    private static final String[] gallows = new String[]{" |\n_О_\n |\n/ \\", "_0_\n |\n/ \\", "_ _\n |\n/ \\", "_\n |\n/ \\", "\n |\n/ \\", "\n\n/ \\", "\n\n/"};
+    private static final String[] gallows = new String[]{" |\n_О_\n |\n/ \\", "_0_\n |\n/ \\", "_ _\n |\n/ \\",
+            "_\n |\n/ \\", "\n |\n/ \\", "\n\n/ \\", "\n\n/"};
     private static StringBuilder userWord;
     private static String secretWord;
     private static char userChar;
