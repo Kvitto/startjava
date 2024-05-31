@@ -20,7 +20,7 @@ public class OverMidElementsRemove {
         System.out.println("\nИзмененный массив:");
         printArray();
         System.out.println("\nКоличество обнуленных ячеек = " + clearedCell);
-        System.out.println("\nЗначение средней ячейки = " + randSequence[midIndex]);
+        System.out.printf("\nЗначение средней ячейки = %.3f%n", randSequence[midIndex]);
     }
 
     private static void fillFields() {

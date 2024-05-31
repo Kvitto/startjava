@@ -45,7 +45,7 @@ public class TypewriterEffect {
     private static void printSlowly(String[] words) throws InterruptedException {
         System.out.println();
         for (String word : words) {
-            for (char letter : word.toCharArray()){
+            for (char letter : word.toCharArray()) {
                 System.out.print(letter);
                 Thread.sleep(100);
             }
@@ -65,6 +65,4 @@ public class TypewriterEffect {
         }
         return true;
     }
-
-
 }

@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class GallowsGame {
-    private static final char[] userChars = new char[33];
-    private static final String[] dictionary = {"ЛУК", "ТОПОР", "ВЕДРО", "САНИ", "ПЕЧКА"};
-    private static final String[] gallows = new String[]{" |\n_О_\n |\n/ \\", "_0_\n |\n/ \\", "_ _\n |\n/ \\",
-            "_\n |\n/ \\", "\n |\n/ \\", "\n\n/ \\", "\n\n/"};
+    private static char[] userChars = new char[33];
+    private static String[] dictionary = {"ЛУК", "ТОПОР", "ВЕДРО", "САНИ", "ПЕЧКА"};
+    private static String[] gallows = new String[]{" |\n_О_\n |\n/ \\", "_0_\n |\n/ \\",
+            "_ _\n |\n/ \\", "_\n |\n/ \\", "\n |\n/ \\", "\n\n/ \\", "\n\n/"};
     private static StringBuilder userWord;
     private static String secretWord;
     private static char userChar;
@@ -18,10 +18,10 @@ public class GallowsGame {
     }
 
     public static void play() {
-        Scanner scan = new Scanner(System.in);
         secretWord = dictionary[(int) (Math.random() * dictionary.length)];
         userWord = new StringBuilder("_".repeat(secretWord.length()));
         life = 7;
+        Scanner scan = new Scanner(System.in);
         System.out.println("\nИгра - ВИСИЛИЦА\n");
         do {
             System.out.println(userWord);
@@ -52,7 +52,7 @@ public class GallowsGame {
                 continue;
             }
             for (int i = 0; i < userChars.length; i++) {
-                if (userChars[i] == '\u0000') {
+                if (userChars[i] == 0) {
                     userChars[i] = userChar;
                     return;
                 }
@@ -62,7 +62,7 @@ public class GallowsGame {
     }
 
     private static boolean checkChar() {
-        if (secretWord.contains(String.valueOf(userChar))){
+        if (secretWord.contains(String.valueOf(userChar))) {
             userWord = new StringBuilder();
             for (int i = 0; i < secretWord.length(); i++) {
                 if (Arrays.toString(userChars).contains(secretWord.substring(i, i + 1))) {

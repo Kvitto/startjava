@@ -108,7 +108,7 @@ public class IfElseStatementTheme {
         // 5. Определение символа по его коду
         System.out.println("\n5. Определение символа по его коду");
 
-        char code = '\u005E';
+        char code = '^';
 
         if (code >= '0' && code <= '9') {
             System.out.println("Символ \"" + code + "\" является цифрой");
