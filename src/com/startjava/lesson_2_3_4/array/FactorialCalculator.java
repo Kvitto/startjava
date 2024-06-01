@@ -9,35 +9,35 @@ public class FactorialCalculator {
         factorial(-22, -0);
     }
 
-    public static void factorial(int... numbers) {
-        if (numbers == null || numbers.length == 0) {
+    public static void factorial(int... sequence) {
+        if (sequence == null || sequence.length == 0) {
             System.out.println("\nМассив не определен.");
             return;
         }
-        int len = numbers.length;
-        long[] factorialResults = new long[len];
-        for (int i = 0; i < len; i++) {
-            if (numbers[i] >= 0) {
-                factorialResults[i] = calculate(numbers[i]);
+        long[] factorialResults = new long[sequence.length];
+        for (int i = 0; i < sequence.length; i++) {
+            if (sequence[i] >= 0) {
+                factorialResults[i] = calculate(sequence[i]);
             }
         }
-        printFactorial(numbers, factorialResults);
+        printFactorial(sequence, factorialResults);
     }
 
-    private static long calculate(int fact) {
+    private static long calculate(int n) {
         long result = 1;
-        for (int i = 1; i <= fact; i++) result *= i;
+        for (int i = 1; i <= n; i++) result *= i;
         return result;
     }
 
-    private static void printFactorial(int[] sequence, long[] factorial) {
-        for (int i = 0; i < sequence.length; i++) {
-            if (sequence[i] > 1) {
+    private static void printFactorial(int[] sequence, long[] factorials) {
+        for (int i = 0; i < factorials.length; i++) {
+            if (factorials[i] > 1) {
                 System.out.print("\n" + sequence[i] + "! = ");
                 for (int j = 1; j <= sequence[i]; j++) {
-                    System.out.print(j < sequence[i] ? j + " * " : sequence[i] + " = " + factorial[i] + "\n");
+                    System.out.print(j < sequence[i] ? j + " * " : sequence[i] + " = " +
+                            factorials[i] + "\n");
                 }
-            } else if (sequence[i] == 0 || sequence[i] == 1) {
+            } else if (factorials[i] == 1) {
                 System.out.println("\n" + sequence[i] + "! = 1");
             } else {
                 System.out.println("\nОшибка: факториал " + sequence[i] + "! не определен");

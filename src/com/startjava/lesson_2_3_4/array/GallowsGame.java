@@ -14,7 +14,7 @@ public class GallowsGame {
     private static int life;
 
     public static void main(String[] args) {
-        GallowsGame.play();
+        play();
     }
 
     public static void play() {
