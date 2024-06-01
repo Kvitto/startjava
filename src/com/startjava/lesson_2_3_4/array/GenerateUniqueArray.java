@@ -10,29 +10,41 @@ public class GenerateUniqueArray {
         printByTen(generate(0, 0));
     }
     /*
-     * Для последовальностей меньше 3 элементов невозможно сгенерировать уникальный массив если
+     * Для последовальности меньше 3 элементов невозможно сгенерировать уникальный массив если
      * она пересикае 0.
      * При инициализации, массив заполняется нулями по умолчанию, и при генерации случайного числа
      * равного 0, оно не проходит проверку на уникальность, т.к. в массиве уже есть ячейки с 0.
-     * Для этого в строке 24 производится декремент кол-ва циклов заполнения массива,
+     * Для этого в строке 30 производится декремент кол-ва циклов заполнения массива,
      * чтобы оставить 0 в крайней ячейке.
      * Граммотного решения чтобы заносить в массив 0 не нашел. Решение задачи у меня получилось кривое.
      */
 
     public static int[] generate(int from, int to) {
-        int[] minMax = {from, to};
-        Arrays.sort(minMax);
-        int len = (int) Math.round((minMax[1] - minMax[0] + 1) * 0.75);
+        if (from > to) {
+            int swap = from;
+            from = to;
+            to = swap;
+        }
+        int len = (int) Math.round((to - from + 1) * 0.75);
         int[] sequence = new int[len];
-        if (len < 3 && minMax[0] <= 0 && minMax[1] >= 0) len--;
+        if (len < 3 && from <= 0 && to >= 0) len--;
         for (int i = 0; i < len; i++) {
             int rndNumb;
             do {
-                rndNumb = (int) Math.round(minMax[0] + Math.random() * (minMax[1] - minMax[0]));
+                rndNumb = (int) Math.round(from + Math.random() * (to - from));
             } while (!isUnique(sequence, rndNumb));
             sequence[i] = rndNumb;
         }
         return sequence;
+    }
+
+    public static boolean isUnique(int[] arr, int toCheckValue) {
+        for (int element : arr) {
+            if (element == toCheckValue) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void printByTen(int[] sequence) {
@@ -46,14 +58,5 @@ public class GenerateUniqueArray {
             }
             System.out.println();
         }
-    }
-
-    public static boolean isUnique(int[] arr, int toCheckValue) {
-        for (int element : arr) {
-            if (element == toCheckValue) {
-                return false;
-            }
-        }
-        return true;
     }
 }
