@@ -1,26 +1,35 @@
 package com.startjava.lesson_2_3_4.calculator;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CalculatorTest {
     public static void main(String[] args) {
-        var scanner = new Scanner(System.in);
-        var calculator = new Calculator();
-        String choice;
+        Scanner console = new Scanner(System.in);
+        Calculator calc = new Calculator();
 
         do {
-            System.out.println("Введите первое число: ");
-            calculator.setArg1(scanner.nextInt());
-            System.out.println("Введите знак математической операции: ");
-            calculator.setSign(scanner.next().charAt(0));
-            System.out.println("Введите второе число: ");
-            calculator.setArg2(scanner.nextInt());
-            calculator.calculate();
-            do {
-                System.out.println("Хотите продолжить вычисления? [yes/no]:");
-                choice = scanner.next().toLowerCase();
-            } while (!"yes".equals(choice) && !"no".equals(choice));
-        } while (choice.equals("yes"));
-        scanner.close();
+            System.out.print("Введите математическое выражение: ");
+            String[] expressions = console.nextLine().split(" ");
+
+            calc.setArg1(Integer.parseInt(expressions[0]));
+            calc.setSign(expressions[1].charAt(0));
+            calc.setArg2(Integer.parseInt(expressions[2]));
+
+            double result = calc.calculate();
+            System.out.println(expressions[0] + " " + expressions[1] + " " + expressions[2] + " = " +
+                    new DecimalFormat("#.###").format(result));
+
+            System.out.print("Хотите продолжить вычисления? [yes / no]: ");
+        } while (repeat(console));
+        console.close();
+    }
+
+    static boolean repeat(Scanner console) {
+        String option = console.nextLine().toLowerCase();
+        if (!"yes".equals(option) && !"no".equals(option)) {
+            System.out.print("Введите корректный ответ [yes / no]: ");
+            return repeat(console);
+        } else return "yes".equals(option);
     }
 }

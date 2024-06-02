@@ -2,43 +2,39 @@ package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
     private int arg1;
-    private int arg2;
     private char sign;
+    private int arg2;
 
     public void setArg1(int arg1) {
         this.arg1 = arg1;
-    }
-
-    public void setArg2(int arg2) {
-        this.arg2 = arg2;
     }
 
     public void setSign(char sign) {
         this.sign = sign;
     }
 
-    public void calculate() {
-        int result = 0;
-        switch (sign) {
-            case '+' -> result = arg1 + arg2;
-            case '-' -> result = arg1 - arg2;
-            case '/' -> {
-                System.out.println((double) arg1 / arg2);
-                return;
-            }
-            case '*' -> result = arg1 * arg2;
-            case '%' -> result = arg1 % arg2;
-            case '^' -> {
-                result = 1;
-                for (int i = 1; i <= arg2; i++) {
-                    result *= arg1;
-                }
-            }
-            default -> {
-                System.out.println("мат. операция не поддерживается");
-                return;
-            }
+    public void setArg2(int arg2) {
+        this.arg2 = arg2;
+    }
+
+    public double calculate() {
+        if (arg2 == 0 && (sign == '/' || sign == '%')) {
+            System.out.println("Ошибка: деление на ноль запрещено");
+            return Double.NaN;
         }
-        System.out.println(result);
+
+        return switch (sign) {
+            case '+' -> arg1 + arg2;
+            case '-' -> arg1 - arg2;
+            case '*' -> arg1 * arg2;
+            case '/' -> (double) arg1 / arg2;
+            case '^' -> Math.pow(arg1, arg2);
+            case '%' -> Math.IEEEremainder(arg1, arg2);
+            default -> {
+                System.out.println("Ошибка: операция '" + sign + "' не поддерживается." +
+                        " Доступны следующие операции: +, -, *, /, ^, %");
+                yield Double.NaN;
+            }
+        };
     }
 }
