@@ -18,9 +18,11 @@ public class FactorialCalculator {
         for (int i = 0; i < sequence.length; i++) {
             if (sequence[i] >= 0) {
                 factorialResults[i] = calculate(sequence[i]);
+                printFactorial(sequence[i], factorialResults[i]);
+            } else {
+                System.out.println("\nОшибка: факториал " + sequence[i] + "! не определен");
             }
         }
-        printFactorial(sequence, factorialResults);
     }
 
     private static long calculate(int n) {
@@ -29,19 +31,15 @@ public class FactorialCalculator {
         return result;
     }
 
-    private static void printFactorial(int[] sequence, long[] factorials) {
-        for (int i = 0; i < factorials.length; i++) {
-            if (factorials[i] > 1) {
-                System.out.print("\n" + sequence[i] + "! = ");
-                for (int j = 1; j <= sequence[i]; j++) {
-                    System.out.print(j < sequence[i] ? j + " * " : sequence[i] + " = " +
-                            factorials[i] + "\n");
-                }
-            } else if (factorials[i] == 1) {
-                System.out.println("\n" + sequence[i] + "! = 1");
-            } else {
-                System.out.println("\nОшибка: факториал " + sequence[i] + "! не определен");
+    private static void printFactorial(int n, long factorial) {
+        if (n > 1) {
+            System.out.print("\n" + n + "! = ");
+            for (int i = 1; i <= n; i++) {
+                System.out.print(i < n ? i + " * " : n + " = " +
+                        factorial + "\n");
             }
+        } else {
+            System.out.println("\n" + n + "! = 1");
         }
     }
 }

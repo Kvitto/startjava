@@ -2,42 +2,36 @@ package com.startjava.lesson_2_3_4.array;
 
 public class CharsToPyramid {
     public static void main(String[] args) {
-        charsToPyramid('0', '9', true);
-        charsToPyramid('/', '!', false);
-        charsToPyramid('A', 'J', false);
+        printPyramid('0', '9', true);
+        printPyramid('/', '!', false);
+        printPyramid('A', 'J', false);
     }
 
-    public static void charsToPyramid(char from, char to, boolean direction) {
-        printPyramid(init(from, to, direction));
+    public static void printPyramid(char from, char to, boolean isAscending) {
+        print(init(from, to, isAscending));
     }
 
-    private static int[] init(int from, int to, boolean direction) {
+    private static int[] init(int from, int to, boolean isAscending) {
         if (from > to) {
             int swap = from;
             from = to;
             to = swap;
         }
         int height = to - from + 1;
-        int[] charsIndexSequence = new int[height];
-        if (direction) {
-            for (int i = 0; i < height; i++) {
-                charsIndexSequence[i] = from + i;
-            }
-        } else {
-            for (int i = 0; i < height; i++) {
-                charsIndexSequence[i] = to - i;
-            }
+        int[] sequence = new int[height];
+        for (int i = 0; i < height; i++) {
+            sequence[i] = isAscending ? from + i : to - i;
         }
-        return charsIndexSequence;
+        return sequence;
     }
 
-    private static void printPyramid(int[] sequence) {
+    private static void print(int[] sequence) {
         System.out.println();
-        var line = new StringBuilder();
+        StringBuilder line;
         for (int i = 0; i < sequence.length; i++) {
-            line.delete(0, line.length());
-            line.append(" ".repeat(Math.max(0, sequence.length - i - 1)));
-            line.append(String.valueOf((char) sequence[i]).repeat(Math.max(0, i * 2 + 1)));
+            line = new StringBuilder();
+            line.append(" ".repeat(sequence.length - i - 1));
+            line.append(String.valueOf((char) sequence[i]).repeat(i * 2 + 1));
             System.out.println(line);
         }
     }
