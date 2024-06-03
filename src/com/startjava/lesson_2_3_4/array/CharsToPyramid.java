@@ -17,9 +17,9 @@ public class CharsToPyramid {
             from = to;
             to = swap;
         }
-        int height = to - from + 1;
-        int[] sequence = new int[height];
-        for (int i = 0; i < height; i++) {
+        int length = to - from + 1;
+        int[] sequence = new int[length];
+        for (int i = 0; i < length; i++) {
             sequence[i] = isAscending ? from + i : to - i;
         }
         return sequence;
@@ -27,12 +27,12 @@ public class CharsToPyramid {
 
     private static void print(int[] sequence) {
         System.out.println();
-        StringBuilder line;
+        var line = new StringBuilder();
         for (int i = 0; i < sequence.length; i++) {
-            line = new StringBuilder();
             line.append(" ".repeat(sequence.length - i - 1));
             line.append(String.valueOf((char) sequence[i]).repeat(i * 2 + 1));
             System.out.println(line);
+            line.setLength(0);
         }
     }
 }

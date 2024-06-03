@@ -2,7 +2,7 @@ package com.startjava.lesson_2_3_4.array;
 
 import java.util.Arrays;
 
-public class GenerateUniqueArray {
+public class UniqueArray {
     public static void main(String[] args) {
         printByTen(generate(-10, 20));
         printByTen(generate(60, 100));
@@ -16,7 +16,7 @@ public class GenerateUniqueArray {
      * равного 0, оно не проходит проверку на уникальность, т.к. в массиве уже есть ячейки с 0.
      * Для этого в строке 30 производится декремент кол-ва циклов заполнения массива,
      * чтобы оставить 0 в крайней ячейке.
-     * Граммотного решения чтобы заносить в массив 0 не нашел. Решение задачи у меня получилось кривое.
+     * Грамотного решения чтобы заносить в массив 0 не нашел. Решение задачи у меня получилось кривое.
      */
 
     public static int[] generate(int from, int to) {
@@ -38,15 +38,6 @@ public class GenerateUniqueArray {
         return sequence;
     }
 
-    public static boolean isUnique(int[] arr, int toCheckValue) {
-        for (int element : arr) {
-            if (element == toCheckValue) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static void printByTen(int[] sequence) {
         if (sequence == null || sequence.length == 0) {
             System.out.println("\nМассив не определен");
@@ -58,5 +49,14 @@ public class GenerateUniqueArray {
             }
             System.out.println();
         }
+    }
+
+    private static boolean isUnique(int[] arr, int toCheckValue) {
+        for (int element : arr) {
+            if (element == toCheckValue) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -1,14 +1,14 @@
 package com.startjava.lesson_2_3_4.array;
 
-public class OverElements {
+public class Elements {
     public static void main(String[] args) {
-        remove(-1);
-        remove(15);
-        remove(0);
-        remove(14);
+        removeBiggerThen(-1);
+        removeBiggerThen(15);
+        removeBiggerThen(0);
+        removeBiggerThen(14);
     }
 
-    public static void remove(int position) {
+    public static void removeBiggerThen(int position) {
         double[] randSequence = generateRandSequence();
         if (position >= randSequence.length || position < 0) {
             System.out.println("\nЭлемент с индексом " + position + " отсутствует.");
