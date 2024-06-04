@@ -27,7 +27,7 @@ public class GallowsGame {
             System.out.println(mask);
             char input = inputChar(scan);
             if (!checkLetters(secretWord, input)) showGallows();
-            makeMask(mask, secretWord);
+            else makeMask(mask, secretWord);
         } while (attempts > 0 && !secretWord.contentEquals(mask));
         System.out.println(secretWord);
         System.out.println("Вы " + (attempts > 0 ? "выиграли!" : "проиграли!"));
