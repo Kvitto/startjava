@@ -1,85 +1,93 @@
 package com.startjava.lesson_2_3_4.array;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class GallowsGame {
-    private static char[] userChars = new char[33];
+    private static char[] letters = new char[33];
     private static String[] dictionary = {"ЛУК", "ТОПОР", "ВЕДРО", "САНИ", "ПЕЧКА"};
-    private static String[] gallows = new String[]{" |\n_О_\n |\n/ \\", "_0_\n |\n/ \\",
-            "_ _\n |\n/ \\", "_\n |\n/ \\", "\n |\n/ \\", "\n\n/ \\", "\n\n/"};
-    private static StringBuilder userWord;
-    private static String secretWord;
-    private static char userChar;
-    private static int life;
+    private static String[] gallows = {"_______",
+            "|     |",
+            "|     @",
+            "|    /|\\",
+            "|    / \\",
+            "| GAME OVER!"
+    };
+    private static int attempts = gallows.length;
 
     public static void main(String[] args) {
         play();
     }
 
     public static void play() {
-        secretWord = dictionary[(int) (Math.random() * dictionary.length)];
-        userWord = new StringBuilder("_".repeat(secretWord.length()));
-        life = 7;
+        String secretWord = dictionary[(int) (Math.random() * dictionary.length)];
+        StringBuilder mask = new StringBuilder("_".repeat(secretWord.length()));
         Scanner scan = new Scanner(System.in);
-        System.out.println("\nИгра - ВИСИЛИЦА\n");
+        System.out.println("\nИгра - ВИСЕЛИЦА\n");
         do {
-            System.out.println(userWord);
-            inputChar(scan);
-            if (!checkChar()) showGallows();
-        } while (life > 0 && !secretWord.contentEquals(userWord));
+            System.out.println(mask);
+            char input = inputChar(scan);
+            if (!checkLetters(secretWord, input)) showGallows();
+            makeMask(mask, secretWord);
+        } while (attempts > 0 && !secretWord.contentEquals(mask));
         System.out.println(secretWord);
-        System.out.println("Вы " + (life > 0 ? "выиграли!" : secretWord + "проиграли!"));
+        System.out.println("Вы " + (attempts > 0 ? "выиграли!" : "проиграли!"));
         scan.close();
     }
 
-    private static void inputChar(Scanner scan) {
+    private static char inputChar(Scanner scan) {
         while (true) {
             System.out.println("\nВведите одну букву: ");
-            userChar = scan.next().toUpperCase().charAt(0);
-            if (Character.UnicodeBlock.of(userChar) != Character.UnicodeBlock.CYRILLIC) {
-                System.out.println(userChar + " это не русская буква! Попробуйте снова.");
+            char input = scan.next().toUpperCase().charAt(0);
+            if ((!String.valueOf(input).matches("[а-яА-Я]"))) {
+                System.out.println(input + " это не русская буква! Попробуйте снова.");
                 continue;
             }
-            boolean isContain = false;
-            for (char sign : userChars)
-                if (sign == userChar) {
-                    isContain = true;
+            boolean isContains = false;
+            for (char letter : letters)
+                if (input == letter) {
+                    isContains = true;
                     break;
                 }
-            if (isContain) {
-                System.out.println("Буква " + userChar + " уже проверялась!");
+            if (isContains) {
+                System.out.println("Буква " + input + " уже проверялась!");
                 continue;
             }
-            for (int i = 0; i < userChars.length; i++) {
-                if (userChars[i] == 0) {
-                    userChars[i] = userChar;
-                    return;
+            for (int i = 0; i < letters.length; i++) {
+                if (letters[i] == 0) {
+                    letters[i] = input;
+                    return input;
                 }
             }
-            break;
         }
     }
 
-    private static boolean checkChar() {
-        if (secretWord.contains(String.valueOf(userChar))) {
-            userWord = new StringBuilder();
-            for (int i = 0; i < secretWord.length(); i++) {
-                if (Arrays.toString(userChars).contains(secretWord.substring(i, i + 1))) {
-                    userWord.append(secretWord.charAt(i));
-                } else {
-                    userWord.append("_");
+    private static boolean checkLetters(String secretWord, char input) {
+        if (secretWord.contains(Character.toString(input))) {
+            if (attempts < gallows.length) attempts++;
+            return true;
+        }
+        attempts--;
+        return false;
+    }
+
+    private static void makeMask(StringBuilder mask, String secretWord) {
+        mask.setLength(0);
+        for (char character : secretWord.toCharArray()) {
+            boolean isContains = false;
+            for (char letter : letters) {
+                if (letter == 0) break;
+                if (character == letter) {
+                    isContains = true;
+                    break;
                 }
             }
-            if (life < 7) life++;
-            return true;
-        } else {
-            life--;
-            return false;
+            mask.append(isContains ? character : "_");
         }
     }
 
     private static void showGallows() {
-        System.out.println(gallows[life]);
+        for (int i = 0; i < gallows.length - attempts; i++) {
+            System.out.println(gallows[i]);
+        }
     }
 }
