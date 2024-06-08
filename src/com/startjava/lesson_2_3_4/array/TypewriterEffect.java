@@ -1,6 +1,5 @@
 package com.startjava.lesson_2_3_4.array;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class TypewriterEffect {
@@ -14,23 +13,36 @@ public class TypewriterEffect {
     }
 
     public static void typeEffect(String string) throws InterruptedException {
-        if (!checkValidString(string)) return;
+        if (!isValid(string)) return;
         printSlowly(prepareString(string));
     }
 
+    private static boolean isValid(String string) {
+        if (string == null || string.isBlank()) {
+            System.out.println("\nОшибка: текста для печати отсутствует.");
+            return false;
+        }
+        return true;
+    }
+
     private static String[] prepareString(String string) {
-        String[] words;
-        words = string.split(" ");
-        String shortWord = "длинное_слово_которое_нужно_заменить";
+        String[] words = string.split(" ");
+        String shortWord = "     ";
         String longWord = "";
-        for (String word : words) {
-            if (Pattern.matches("[a-zA-Zа-яА-Я]+", word)) {
-                if (word.length() < shortWord.length()) shortWord = word;
-                if (word.length() > longWord.length()) longWord = word;
+        int fromUpCase = 0;
+        int toUpCase = 0;
+        for (int i = 0; i < words.length; i++) {
+            if (Pattern.matches("[a-zA-Zа-яА-Я]+", words[i])) {
+                if (words[i].length() < shortWord.length()) {
+                    shortWord = words[i];
+                    fromUpCase = i;
+                }
+                if (words[i].length() > longWord.length()) {
+                    longWord = words[i];
+                    toUpCase = i;
+                }
             }
         }
-        int fromUpCase = Arrays.asList(words).indexOf(shortWord);
-        int toUpCase = Arrays.asList(words).indexOf(longWord);
         if (fromUpCase > toUpCase) {
             fromUpCase += toUpCase;
             toUpCase = fromUpCase - toUpCase;
@@ -52,17 +64,5 @@ public class TypewriterEffect {
             System.out.print(" ");
         }
         System.out.println();
-    }
-
-    private static boolean checkValidString(String string) {
-        if (string == null) {
-            System.out.println("\nnull");
-            return false;
-        }
-        if (string.isBlank()) {
-            System.out.println("\nпустая строка");
-            return false;
-        }
-        return true;
     }
 }

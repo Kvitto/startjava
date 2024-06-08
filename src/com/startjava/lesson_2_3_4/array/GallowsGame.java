@@ -3,9 +3,9 @@ package com.startjava.lesson_2_3_4.array;
 import java.util.Scanner;
 
 public class GallowsGame {
-    private static char[] letters = new char[33];
     private static String[] dictionary = {"ЛУК", "ТОПОР", "ВЕДРО", "САНИ", "ПЕЧКА"};
-    private static String[] gallows = {"_______",
+    private static String[] gallows = {
+            "_______",
             "|     |",
             "|     @",
             "|    /|\\",
@@ -21,71 +21,47 @@ public class GallowsGame {
     public static void play() {
         String secretWord = dictionary[(int) (Math.random() * dictionary.length)];
         StringBuilder mask = new StringBuilder("_".repeat(secretWord.length()));
+        StringBuilder letters = new StringBuilder();
         Scanner scan = new Scanner(System.in);
         System.out.println("\nИгра - ВИСЕЛИЦА\n");
         do {
             System.out.println(mask);
-            char input = inputChar(scan);
-            if (!checkLetters(secretWord, input)) showGallows();
-            else makeMask(mask, secretWord);
+            char letter = inputLetter(scan, letters);
+            if (secretWord.indexOf(letter) >= 0) makeMask(mask, secretWord, letter);
+            else showGallows();
         } while (attempts > 0 && !secretWord.contentEquals(mask));
         System.out.println(secretWord);
         System.out.println("Вы " + (attempts > 0 ? "выиграли!" : "проиграли!"));
         scan.close();
     }
 
-    private static char inputChar(Scanner scan) {
+    private static char inputLetter(Scanner scan, StringBuilder letters) {
         while (true) {
             System.out.println("\nВведите одну букву: ");
-            char input = scan.next().toUpperCase().charAt(0);
-            if ((!String.valueOf(input).matches("[а-яА-Я]"))) {
-                System.out.println(input + " это не русская буква! Попробуйте снова.");
+            char letter = scan.next().toUpperCase().charAt(0);
+            if ((!String.valueOf(letter).matches("[а-яА-Я]"))) {
+                System.out.println(letter + " это не русская буква! Попробуйте снова.");
                 continue;
             }
-            boolean isContains = false;
-            for (char letter : letters)
-                if (input == letter) {
-                    isContains = true;
-                    break;
-                }
-            if (isContains) {
-                System.out.println("Буква " + input + " уже проверялась!");
+            if (letters.toString().indexOf(letter) >= 0) {
+                System.out.println("Вы уже вводили букву " + letter + ". Попробуйте еще раз.");
                 continue;
             }
-            for (int i = 0; i < letters.length; i++) {
-                if (letters[i] == 0) {
-                    letters[i] = input;
-                    return input;
-                }
-            }
+            letters.append(letter);
+            return letter;
         }
     }
 
-    private static boolean checkLetters(String secretWord, char input) {
-        if (secretWord.contains(Character.toString(input))) {
-            if (attempts < gallows.length) attempts++;
-            return true;
+    private static void makeMask(StringBuilder mask, String secretWord, char letter) {
+        for (int i = 0; i < secretWord.length(); i++) {
+            if (mask.charAt(i) != '_') continue;
+            if (secretWord.charAt(i) == letter) mask.replace(i, i + 1, String.valueOf(letter));
         }
-        attempts--;
-        return false;
-    }
-
-    private static void makeMask(StringBuilder mask, String secretWord) {
-        mask.setLength(0);
-        for (char character : secretWord.toCharArray()) {
-            boolean isContains = false;
-            for (char letter : letters) {
-                if (letter == 0) break;
-                if (character == letter) {
-                    isContains = true;
-                    break;
-                }
-            }
-            mask.append(isContains ? character : "_");
-        }
+        if (attempts < gallows.length) attempts++;
     }
 
     private static void showGallows() {
+        attempts--;
         for (int i = 0; i < gallows.length - attempts; i++) {
             System.out.println(gallows[i]);
         }

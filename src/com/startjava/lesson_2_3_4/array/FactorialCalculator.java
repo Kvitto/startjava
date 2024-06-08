@@ -19,9 +19,9 @@ public class FactorialCalculator {
             if (sequence[i] >= 0) {
                 factorialResults[i] = factorial(sequence[i]);
                 printFactorial(sequence[i], factorialResults[i]);
-            } else {
-                System.out.println("\nОшибка: факториал " + sequence[i] + "! не определен");
+                continue;
             }
+            System.out.println("\nОшибка: факториал " + sequence[i] + "! не определен");
         }
     }
 
@@ -35,11 +35,10 @@ public class FactorialCalculator {
         if (n > 1) {
             System.out.print("\n" + n + "! = ");
             for (int i = 1; i <= n; i++) {
-                System.out.print(i < n ? i + " * " : n + " = " +
-                        factorial + "\n");
+                System.out.print(i < n ? i + " * " : n + " = " + factorial + "\n");
             }
-        } else {
-            System.out.println("\n" + n + "! = 1");
+            return;
         }
+        System.out.println("\n" + n + "! = 1");
     }
 }

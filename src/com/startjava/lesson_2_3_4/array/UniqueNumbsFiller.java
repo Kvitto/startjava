@@ -2,7 +2,7 @@ package com.startjava.lesson_2_3_4.array;
 
 import java.util.Arrays;
 
-public class UniqueArray {
+public class UniqueNumbsFiller {
     public static void main(String[] args) {
         printByTen(generate(-10, 20));
         printByTen(generate(60, 100));
@@ -41,14 +41,14 @@ public class UniqueArray {
     public static void printByTen(int[] sequence) {
         if (sequence == null || sequence.length == 0) {
             System.out.println("\nМассив не определен");
-        } else {
-            Arrays.sort(sequence);
-            for (int i = 0; i < sequence.length; i++) {
-                if (i % 10 == 0) System.out.println();
-                System.out.printf("%3d ", sequence[i]);
-            }
-            System.out.println();
+            return;
         }
+        Arrays.sort(sequence);
+        for (int i = 0; i < sequence.length; i++) {
+            if (i % 10 == 0) System.out.println();
+            System.out.printf("%3d ", sequence[i]);
+        }
+        System.out.println();
     }
 
     private static boolean isUnique(int[] arr, int toCheckValue) {

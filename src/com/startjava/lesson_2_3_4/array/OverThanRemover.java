@@ -22,19 +22,6 @@ public class OverThanRemover {
         System.out.println("\nКоличество измененных ячеек: " + clearedCell);
     }
 
-    private static int removeElements(double[] randSequence, int position) {
-        int clearedCell = 0;
-        for (int i = 0; i < randSequence.length; i++) {
-            if (randSequence[i] > randSequence[position]) {
-                randSequence[i] = 0;
-                clearedCell++;
-            }
-        }
-        System.out.println("\nИзмененный массив:");
-        printArray(randSequence);
-        return clearedCell;
-    }
-
     private static double[] generateRandSequence() {
         double[] sequence = new double[15];
         for (int i = 0; i < sequence.length; i++) {
@@ -49,5 +36,18 @@ public class OverThanRemover {
             System.out.printf("%.3f ", randSequence[i]);
             if (i == len / 2 || i == len - 1) System.out.println();
         }
+    }
+
+    private static int removeElements(double[] randSequence, int position) {
+        int clearedCells = 0;
+        for (int i = 0; i < randSequence.length; i++) {
+            if (randSequence[i] > randSequence[position]) {
+                randSequence[i] = 0;
+                clearedCells++;
+            }
+        }
+        System.out.println("\nИзмененный массив:");
+        printArray(randSequence);
+        return clearedCells;
     }
 }
