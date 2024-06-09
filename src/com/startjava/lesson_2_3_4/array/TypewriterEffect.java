@@ -4,22 +4,22 @@ import java.util.regex.Pattern;
 
 public class TypewriterEffect {
     public static void main(String[] args) throws InterruptedException {
-        typeEffect("Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n" +
+        showTypewriterEffect("Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n" +
                 "- James Gosling");
-        typeEffect("Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.\n" +
-                "- Robert Martin");
-        typeEffect(null);
-        typeEffect("");
+        showTypewriterEffect("Чтобы написать чистый код, мы сначала пишем грязный код, " +
+                "затем рефакторим его.\n- Robert Martin");
+        showTypewriterEffect(null);
+        showTypewriterEffect("");
     }
 
-    public static void typeEffect(String string) throws InterruptedException {
-        if (!isValid(string)) return;
-        printSlowly(prepareString(string));
+    public static void showTypewriterEffect(String inputString) throws InterruptedException {
+        if (!isValid(inputString)) return;
+        printSlowly(prepareString(inputString));
     }
 
-    private static boolean isValid(String string) {
-        if (string == null || string.isBlank()) {
-            System.out.println("\nОшибка: текста для печати отсутствует.");
+    private static boolean isValid(String inputString) {
+        if (inputString == null || inputString.isBlank()) {
+            System.out.println("\nОшибка: текст не задан! Введите текст.");
             return false;
         }
         return true;
@@ -27,18 +27,19 @@ public class TypewriterEffect {
 
     private static String[] prepareString(String string) {
         String[] words = string.split(" ");
-        String shortWord = "     ";
-        String longWord = "";
+        String shortWord = words[0];
+        String longWord = words[0];
         int fromUpCase = 0;
         int toUpCase = 0;
         for (int i = 0; i < words.length; i++) {
-            if (Pattern.matches("[a-zA-Zа-яА-Я]+", words[i])) {
-                if (words[i].length() < shortWord.length()) {
-                    shortWord = words[i];
+            String word = words[i].replaceAll("\\p{P}", "");
+            if (Pattern.matches("[a-zA-Zа-яА-Я]+", word)) {
+                if (word.length() < shortWord.length()) {
+                    shortWord = word;
                     fromUpCase = i;
                 }
-                if (words[i].length() > longWord.length()) {
-                    longWord = words[i];
+                if (word.length() > longWord.length()) {
+                    longWord = word;
                     toUpCase = i;
                 }
             }

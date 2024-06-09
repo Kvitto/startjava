@@ -27,8 +27,16 @@ public class GallowsGame {
         do {
             System.out.println(mask);
             char letter = inputLetter(scan, letters);
-            if (secretWord.indexOf(letter) >= 0) makeMask(mask, secretWord, letter);
-            else showGallows();
+            if (secretWord.indexOf(letter) >= 0) {
+                if (attempts < gallows.length) attempts++;
+                addToMask(mask, secretWord, letter);
+            } else {
+                attempts--;
+                letters.append(letter);
+                showGallows();
+            }
+            System.out.println("Текущее кол-во попыток: " + attempts);
+            System.out.println("Все ошибочные буквы: " + letters);
         } while (attempts > 0 && !secretWord.contentEquals(mask));
         System.out.println(secretWord);
         System.out.println("Вы " + (attempts > 0 ? "выиграли!" : "проиграли!"));
@@ -47,21 +55,18 @@ public class GallowsGame {
                 System.out.println("Вы уже вводили букву " + letter + ". Попробуйте еще раз.");
                 continue;
             }
-            letters.append(letter);
             return letter;
         }
     }
 
-    private static void makeMask(StringBuilder mask, String secretWord, char letter) {
+    private static void addToMask(StringBuilder mask, String secretWord, char letter) {
         for (int i = 0; i < secretWord.length(); i++) {
             if (mask.charAt(i) != '_') continue;
-            if (secretWord.charAt(i) == letter) mask.replace(i, i + 1, String.valueOf(letter));
+            if (secretWord.charAt(i) == letter) mask.setCharAt(i, letter);
         }
-        if (attempts < gallows.length) attempts++;
     }
 
     private static void showGallows() {
-        attempts--;
         for (int i = 0; i < gallows.length - attempts; i++) {
             System.out.println(gallows[i]);
         }
