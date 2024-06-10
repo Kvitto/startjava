@@ -1,7 +1,5 @@
 package com.startjava.lesson_2_3_4.array;
 
-import java.util.regex.Pattern;
-
 public class TypewriterEffect {
     public static void main(String[] args) throws InterruptedException {
         showTypewriterEffect("Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n" +
@@ -32,16 +30,15 @@ public class TypewriterEffect {
         int fromUpCase = 0;
         int toUpCase = 0;
         for (int i = 0; i < words.length; i++) {
-            String word = words[i].replaceAll("\\p{P}", "");
-            if (Pattern.matches("[a-zA-Zа-яА-Я]+", word)) {
-                if (word.length() < shortWord.length()) {
-                    shortWord = word;
-                    fromUpCase = i;
-                }
-                if (word.length() > longWord.length()) {
-                    longWord = word;
-                    toUpCase = i;
-                }
+            String noPunctuation = words[i].replaceAll("\\p{P}", "");
+            if (noPunctuation.isEmpty()) continue;
+            if (noPunctuation.length() < shortWord.length()) {
+                shortWord = noPunctuation;
+                fromUpCase = i;
+            }
+            if (noPunctuation.length() > longWord.length()) {
+                longWord = noPunctuation;
+                toUpCase = i;
             }
         }
         if (fromUpCase > toUpCase) {
