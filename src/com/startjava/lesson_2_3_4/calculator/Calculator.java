@@ -17,7 +17,8 @@ public class Calculator {
         this.arg2 = arg2;
     }
 
-    public double calculate() {
+    public double calculate(String expression) {
+        prepareExpression(expression);
         if (arg2 == 0 && (sign == '/' || sign == '%')) {
             System.out.println("Ошибка: деление на ноль запрещено");
             return Double.NaN;
@@ -36,5 +37,12 @@ public class Calculator {
                 yield Double.NaN;
             }
         };
+    }
+
+    private void prepareExpression(String expression) {
+        String[] expressions = expression.split(" ");
+        this.setArg1(Integer.parseInt(expressions[0]));
+        this.setSign(expressions[1].charAt(0));
+        this.setArg2(Integer.parseInt(expressions[2]));
     }
 }

@@ -7,29 +7,29 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
         Calculator calc = new Calculator();
-
         do {
             System.out.print("Введите математическое выражение: ");
-            String[] expressions = console.nextLine().split(" ");
-
-            calc.setArg1(Integer.parseInt(expressions[0]));
-            calc.setSign(expressions[1].charAt(0));
-            calc.setArg2(Integer.parseInt(expressions[2]));
-
-            double result = calc.calculate();
-            System.out.println(expressions[0] + " " + expressions[1] + " " + expressions[2] + " = " +
-                    new DecimalFormat("#.###").format(result));
-
+            String expression = console.nextLine();
+            printResult(expression, calc.calculate(expression));
             System.out.print("Хотите продолжить вычисления? [yes / no]: ");
         } while (repeat(console));
         console.close();
     }
 
-    static boolean repeat(Scanner console) {
+    private static void printResult(String expression, double result) {
+        if (Double.isNaN(result)) {
+            System.out.println("Результат не определен!");
+            return;
+        }
+        System.out.println(expression + " = " + new DecimalFormat("#.###").format(result));
+    }
+
+    private static boolean repeat(Scanner console) {
         String option = console.nextLine().toLowerCase();
         if (!"yes".equals(option) && !"no".equals(option)) {
             System.out.print("Введите корректный ответ [yes / no]: ");
             return repeat(console);
-        } else return "yes".equals(option);
+        }
+        return "yes".equals(option);
     }
 }
