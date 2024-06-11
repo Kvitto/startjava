@@ -40,9 +40,9 @@ public class Calculator {
     }
 
     private void prepareExpression(String expression) {
-        String[] expressions = expression.split(" ");
-        this.setArg1(Integer.parseInt(expressions[0]));
-        this.setSign(expressions[1].charAt(0));
-        this.setArg2(Integer.parseInt(expressions[2]));
+        String[] pieces = expression.split(" ");
+        this.setArg1(Integer.parseInt(pieces[0]));
+        this.setSign(pieces[1].charAt(0));
+        this.setArg2(Integer.parseInt(pieces[2]));
     }
 }
