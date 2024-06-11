@@ -23,7 +23,6 @@ public class Calculator {
             System.out.println("Ошибка: деление на ноль запрещено");
             return Double.NaN;
         }
-
         return switch (sign) {
             case '+' -> arg1 + arg2;
             case '-' -> arg1 - arg2;
