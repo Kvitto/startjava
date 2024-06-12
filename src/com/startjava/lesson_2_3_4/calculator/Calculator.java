@@ -1,16 +1,13 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
-    private int arg1;
-    private char sign;
-    private int arg2;
+    private static final int BINOMIAL = 3;
+    private static int arg1;
+    private static char sign;
+    private static int arg2;
 
-    public double calculate(String expression) {
+    public static double calculate(String expression) throws RuntimeException {
         prepareExpression(expression);
-        if (arg2 == 0 && (sign == '/' || sign == '%')) {
-            System.out.println("Ошибка: деление на ноль запрещено");
-            return Double.NaN;
-        }
         return switch (sign) {
             case '+' -> arg1 + arg2;
             case '-' -> arg1 - arg2;
@@ -18,18 +15,25 @@ public class Calculator {
             case '/' -> (double) arg1 / arg2;
             case '^' -> Math.pow(arg1, arg2);
             case '%' -> Math.IEEEremainder(arg1, arg2);
-            default -> {
-                System.out.println("Ошибка: операция '" + sign + "' не поддерживается." +
+            default -> throw new RuntimeException("Ошибка: операция '" + sign + "' не поддерживается." +
                         " Доступны следующие операции: +, -, *, /, ^, %");
-                yield Double.NaN;
-            }
         };
     }
 
-    private void prepareExpression(String expression) {
+    private static void prepareExpression(String expression) throws RuntimeException {
         String[] elements = expression.split(" ");
-        this.arg1 = Integer.parseInt(elements[0]);
-        this.sign = elements[1].charAt(0);
-        this.arg2 = Integer.parseInt(elements[2]);
+        if (elements.length != BINOMIAL) throw new RuntimeException("Ошибка: выражения данного " +
+                "вида не поддерживаются.\nВведите выражение состоящее из 2-х членов и знака отделенного " +
+                "пробелами.");
+        sign = elements[1].charAt(0);
+        try {
+            arg1 = Integer.parseInt(elements[0]);
+            arg2 = Integer.parseInt(elements[2]);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Ошибка: недопустимый формат чисел.\nИспользуйте целые числа.");
+        }
+        if (arg2 == 0 && (sign == '/' || sign == '%')) {
+            throw new RuntimeException("Ошибка: деление на ноль запрещено");
+        }
     }
 }

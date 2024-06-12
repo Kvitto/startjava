@@ -6,19 +6,18 @@ import java.util.Scanner;
 public class CalculatorTest {
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
-        Calculator calc = new Calculator();
         do {
-            System.out.print("Введите математическое выражение: ");
-            String expression = console.nextLine();
-            printResult(expression, calc.calculate(expression));
-            System.out.print("Хотите продолжить вычисления? [yes / no]: ");
+            System.out.print("\nВведите математическое выражение: ");
+            try {
+                String expression = console.nextLine().trim().replaceAll("\\s+", " ");
+                System.out.println(expression + " = " +
+                        new DecimalFormat("#.###").format(Calculator.calculate(expression)));
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
+            System.out.print("\nХотите продолжить вычисления? [yes / no]: ");
         } while (repeat(console));
         console.close();
-    }
-
-    private static void printResult(String expression, double result) {
-        if (Double.isNaN(result)) return;
-        System.out.println(expression + " = " + new DecimalFormat("#.###").format(result));
     }
 
     private static boolean repeat(Scanner console) {
