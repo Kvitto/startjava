@@ -17,10 +17,7 @@ public class CalculatorTest {
     }
 
     private static void printResult(String expression, double result) {
-        if (Double.isNaN(result)) {
-            System.out.println("Результат не определен!");
-            return;
-        }
+        if (Double.isNaN(result)) return;
         System.out.println(expression + " = " + new DecimalFormat("#.###").format(result));
     }
 

@@ -5,18 +5,6 @@ public class Calculator {
     private char sign;
     private int arg2;
 
-    public void setArg1(int arg1) {
-        this.arg1 = arg1;
-    }
-
-    public void setSign(char sign) {
-        this.sign = sign;
-    }
-
-    public void setArg2(int arg2) {
-        this.arg2 = arg2;
-    }
-
     public double calculate(String expression) {
         prepareExpression(expression);
         if (arg2 == 0 && (sign == '/' || sign == '%')) {
@@ -39,9 +27,9 @@ public class Calculator {
     }
 
     private void prepareExpression(String expression) {
-        String[] pieces = expression.split(" ");
-        this.setArg1(Integer.parseInt(pieces[0]));
-        this.setSign(pieces[1].charAt(0));
-        this.setArg2(Integer.parseInt(pieces[2]));
+        String[] elements = expression.split(" ");
+        this.arg1 = Integer.parseInt(elements[0]);
+        this.sign = elements[1].charAt(0);
+        this.arg2 = Integer.parseInt(elements[2]);
     }
 }
