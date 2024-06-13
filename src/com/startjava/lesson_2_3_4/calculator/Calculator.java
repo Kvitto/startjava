@@ -9,8 +9,11 @@ public class Calculator {
     private Calculator() {
     }
 
-    public static double calculate(String expression) throws RuntimeException {
-        prepareExpression(expression);
+    public static double calculate(String expression) {
+        String[] elements = expression.split(" ");
+        verifyFormat(elements);
+        prepareExpression(elements);
+        verifyZeroDivision();
         return switch (sign) {
             case '+' -> arg1 + arg2;
             case '-' -> arg1 - arg2;
@@ -23,18 +26,23 @@ public class Calculator {
         };
     }
 
-    private static void prepareExpression(String expression) throws RuntimeException {
-        String[] elements = expression.split(" ");
-        if (elements.length != BINOMIAL) throw new RuntimeException("Ошибка: выражения данного " +
-                "вида не поддерживаются.\nВведите выражение состоящее из 2-х членов и знака отделенного " +
-                "пробелами.");
-        sign = elements[1].charAt(0);
+    private static void prepareExpression(String[] elements) {
         try {
             arg1 = Integer.parseInt(elements[0]);
             arg2 = Integer.parseInt(elements[2]);
         } catch (NumberFormatException e) {
             throw new RuntimeException("Ошибка: недопустимый формат чисел.\nИспользуйте целые числа.");
         }
+        sign = elements[1].charAt(0);
+    }
+
+    private static void verifyFormat(String[] elements) {
+        if (elements.length != BINOMIAL) {
+            throw new RuntimeException("Ошибка! Введите выражение из 2-х членов.");
+        }
+    }
+
+    private static void verifyZeroDivision() {
         if (arg2 == 0 && (sign == '/' || sign == '%')) {
             throw new RuntimeException("Ошибка: деление на ноль запрещено");
         }

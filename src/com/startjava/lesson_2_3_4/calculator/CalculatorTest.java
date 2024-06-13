@@ -8,16 +8,24 @@ public class CalculatorTest {
         Scanner console = new Scanner(System.in);
         do {
             System.out.print("\nВведите математическое выражение: ");
+            String expression = inputExpression(console);
             try {
-                String expression = console.nextLine().trim().replaceAll("\\s+", " ");
-                System.out.println(expression + " = " +
-                        new DecimalFormat("#.###").format(Calculator.calculate(expression)));
+                printResult(expression, Calculator.calculate(expression));
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
             }
             System.out.print("\nХотите продолжить вычисления? [yes / no]: ");
         } while (repeat(console));
         console.close();
+    }
+
+    private static String inputExpression(Scanner console) {
+        return console.nextLine().trim().replaceAll("\\s+", " ");
+    }
+    
+    private static void printResult(String expression, double result) {
+        System.out.println(expression + " = " +
+                new DecimalFormat("#.###").format(result));
     }
 
     private static boolean repeat(Scanner console) {
