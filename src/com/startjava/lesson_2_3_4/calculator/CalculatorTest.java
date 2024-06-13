@@ -16,6 +16,7 @@ public class CalculatorTest {
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
             }
+            System.out.print("\nХотите продолжить вычисления? [yes / no]: ");
         } while (shouldContinue(console));
         console.close();
     }
@@ -31,7 +32,6 @@ public class CalculatorTest {
     }
 
     private static boolean shouldContinue(Scanner console) {
-        System.out.print("\nХотите продолжить вычисления? [yes / no]: ");
         String option = console.nextLine().toLowerCase();
         if (!YES.equals(option) && !NO.equals(option)) {
             System.out.print("Введите корректный ответ [yes / no]: ");
