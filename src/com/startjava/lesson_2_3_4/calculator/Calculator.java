@@ -10,10 +10,7 @@ public class Calculator {
     }
 
     public static double calculate(String expression) {
-        String[] elements = expression.split(" ");
-        verifyFormat(elements);
-        prepareExpression(elements);
-        verifyZeroDivision();
+        parseExpression(expression);
         return switch (sign) {
             case '+' -> arg1 + arg2;
             case '-' -> arg1 - arg2;
@@ -22,27 +19,34 @@ public class Calculator {
             case '^' -> Math.pow(arg1, arg2);
             case '%' -> Math.IEEEremainder(arg1, arg2);
             default -> throw new RuntimeException("Ошибка: операция '" + sign + "' не поддерживается." +
-                        " Доступны следующие операции: +, -, *, /, ^, %");
+                    " Доступны следующие операции: +, -, *, /, ^, %");
         };
     }
 
-    private static void prepareExpression(String[] elements) {
-        try {
-            arg1 = Integer.parseInt(elements[0]);
-            arg2 = Integer.parseInt(elements[2]);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Ошибка: недопустимый формат чисел.\nИспользуйте целые числа.");
-        }
+    private static void parseExpression(String expression) {
+        String[] elements = expression.split(" ");
+        checkLimit(elements);
+        arg1 = convertToInteger(elements[0]);
+        arg2 = convertToInteger(elements[2]);
         sign = elements[1].charAt(0);
+        checkDivByZero();
     }
 
-    private static void verifyFormat(String[] elements) {
+    private static void checkLimit(String[] elements) {
         if (elements.length != BINOMIAL) {
             throw new RuntimeException("Ошибка! Введите выражение из 2-х членов.");
         }
     }
 
-    private static void verifyZeroDivision() {
+    private static int convertToInteger(String string) {
+        try {
+            return Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Ошибка! Используйте целые числа.");
+        }
+    }
+
+    private static void checkDivByZero() {
         if (arg2 == 0 && (sign == '/' || sign == '%')) {
             throw new RuntimeException("Ошибка: деление на ноль запрещено");
         }
