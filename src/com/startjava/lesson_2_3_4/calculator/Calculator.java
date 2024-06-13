@@ -20,6 +20,9 @@ public class Calculator {
         };
     }
 
+    private Calculator() {
+    }
+
     private static void prepareExpression(String expression) throws RuntimeException {
         String[] elements = expression.split(" ");
         if (elements.length != BINOMIAL) throw new RuntimeException("Ошибка: выражения данного " +
