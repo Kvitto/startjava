@@ -6,6 +6,9 @@ public class Calculator {
     private static char sign;
     private static int arg2;
 
+    private Calculator() {
+    }
+
     public static double calculate(String expression) throws RuntimeException {
         prepareExpression(expression);
         return switch (sign) {
@@ -18,9 +21,6 @@ public class Calculator {
             default -> throw new RuntimeException("Ошибка: операция '" + sign + "' не поддерживается." +
                         " Доступны следующие операции: +, -, *, /, ^, %");
         };
-    }
-
-    private Calculator() {
     }
 
     private static void prepareExpression(String expression) throws RuntimeException {
