@@ -10,7 +10,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         numbers = new int[10];
-        attempts = numbers.length;
+        attempts = 0;
     }
 
     public String getName() {
@@ -18,20 +18,20 @@ public class Player {
     }
 
     public int[] getNumbers() {
-        return Arrays.copyOf(numbers, numbers.length - attempts);
+        return Arrays.copyOf(numbers, attempts);
     }
 
     public void setNumbers(int number) {
-        numbers[numbers.length - attempts] = number;
-        attempts--;
+        numbers[attempts] = number;
+        attempts++;
     }
 
     public void resetPlayer() {
         Arrays.fill(numbers, 0, getNumbers().length, 0);
-        attempts = numbers.length;
+        attempts = 0;
     }
 
     public int getAttempts() {
-        return attempts;
+        return numbers.length - attempts;
     }
 }

@@ -17,8 +17,7 @@ public class GuessNumber {
         int startPlayer = (int) (Math.random() * players.length);
         for (int i = startPlayer; i < players.length; ) {
             if (!hasAttempts(players[i])) break;
-            System.out.printf("Игрок %s введите число от 1 до 100: ", players[i].getName());
-            players[i].setNumbers(scanner.nextInt());
+            inputPlayerNum(players[i], scanner);
             if (hasGuessed(secretNum, players[i])) break;
             if (++i == players.length) i = 0;
         }
@@ -32,6 +31,11 @@ public class GuessNumber {
             return false;
         }
         return true;
+    }
+
+    private void inputPlayerNum(Player player, Scanner scanner) {
+        System.out.printf("Игрок %s введите число от 1 до 100: ", player.getName());
+        player.setNumbers(scanner.nextInt());
     }
 
     private boolean hasGuessed(int secretNum, Player player) {
