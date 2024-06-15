@@ -7,16 +7,16 @@ public class GuessNumberTest {
     private static final String NO = "no";
 
     public static void main(String[] args) {
-        var scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Введите имя первого игрока: ");
         var namePlayer1 = scanner.nextLine();
         System.out.print("Введите имя второго игрока: ");
         var namePlayer2 = scanner.nextLine();
         var game = new GuessNumber(namePlayer1, namePlayer2);
         do {
-            game.reset();
             System.out.println("\nИгра началась! У каждого игрока по 10 попыток.\n");
-            game.play();
+            game.play(scanner);
+            scanner.nextLine();
             System.out.print("\nХотите повторить? [yes / no]: ");
         } while (shouldContinue(scanner));
         scanner.close();
