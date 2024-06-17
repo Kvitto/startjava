@@ -5,18 +5,19 @@ import java.util.Scanner;
 public class GuessNumber {
     private final Player[] players;
 
-    public GuessNumber(String... names) {
+    public GuessNumber(int roundsAmount, String... names) {
         players = new Player[names.length];
         for (int i = 0; i < players.length; i++) {
-            players[i] = new Player(names[i]);
+            players[i] = new Player(names[i], roundsAmount);
         }
     }
 
     public void play(Scanner scanner) {
         int secretNum = (int) (Math.random() * 100 + 1);
-        int startPlayer = (int) (Math.random() * players.length);
-        for (int i = startPlayer; i < players.length; ) {
+        shufflePlayers();
+        for (int i = 0; i < players.length; ) {
             if (!hasAttempts(players[i])) break;
+            System.out.printf("Игрок %s введите число от 1 до 100: ", players[i].getName());
             inputPlayerNum(players[i], scanner);
             if (hasGuessed(secretNum, players[i])) break;
             if (++i == players.length) i = 0;
@@ -25,17 +26,43 @@ public class GuessNumber {
         reset();
     }
 
+    private void shufflePlayers() {
+        for (int i = 1; i < players.length; i++) {
+            int swapTo = players.length - i;
+            int swapFrom = (int) (Math.random() * (swapTo + 1));
+            if (swapFrom == swapTo) continue;
+            Player swap = players[swapFrom];
+            players[swapFrom] = players[swapTo];
+            players[swapTo] = swap;
+        }
+    }
+
     private boolean hasAttempts(Player player) {
         if (player.getAttempts() == 0) {
             System.out.printf("У %s закончились попытки!%n", player.getName());
+            System.out.println("Ничья!");
             return false;
         }
         return true;
     }
 
     private void inputPlayerNum(Player player, Scanner scanner) {
-        System.out.printf("Игрок %s введите число от 1 до 100: ", player.getName());
-        player.setNumbers(scanner.nextInt());
+        try {
+            int inputNum = scanner.nextInt();
+            checkDouble(inputNum);
+            player.setNumbers(inputNum);
+        } catch (RuntimeException e) {
+            System.out.print("Число должно входить в интервал [1, 100]\nПопробуйте еще раз: ");
+            inputPlayerNum(player, scanner);
+        }
+    }
+
+    private void checkDouble(int inputNum) {
+        for (Player player : players) {
+            for (int num : player.getNumbers()) {
+                if (num == inputNum) throw new RuntimeException();
+            }
+        }
     }
 
     private boolean hasGuessed(int secretNum, Player player) {

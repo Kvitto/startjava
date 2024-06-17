@@ -7,9 +7,9 @@ public class Player {
     private int attempts;
     private final int[] numbers;
 
-    public Player(String name) {
+    public Player(String name, int roundsAmount) {
         this.name = name;
-        numbers = new int[10];
+        numbers = new int[roundsAmount];
         attempts = 0;
     }
 
@@ -22,6 +22,7 @@ public class Player {
     }
 
     public void setNumbers(int number) {
+        if (number < 1 || number > 100) throw new RuntimeException();
         numbers[attempts] = number;
         attempts++;
     }

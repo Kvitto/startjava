@@ -3,16 +3,14 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Scanner;
 
 public class GuessNumberTest {
+    private static final int PLAYERS_AMOUNT = 3;
+    private static final int ROUNDS_AMOUNT = 3;
     private static final String YES = "yes";
     private static final String NO = "no";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите имя первого игрока: ");
-        var namePlayer1 = scanner.nextLine();
-        System.out.print("Введите имя второго игрока: ");
-        var namePlayer2 = scanner.nextLine();
-        var game = new GuessNumber(namePlayer1, namePlayer2);
+        GuessNumber game = initial(scanner);
         do {
             System.out.println("\nИгра началась! У каждого игрока по 10 попыток.\n");
             game.play(scanner);
@@ -20,6 +18,15 @@ public class GuessNumberTest {
             System.out.print("\nХотите повторить? [yes / no]: ");
         } while (shouldContinue(scanner));
         scanner.close();
+    }
+
+    private static GuessNumber initial(Scanner scanner) {
+        String[] playersNames = new String[PLAYERS_AMOUNT];
+        for (int i = 0; i < PLAYERS_AMOUNT; i++) {
+            System.out.printf("Введите имя " + (i + 1) + "-го игрока: ");
+            playersNames[i] = scanner.nextLine();
+        }
+        return new GuessNumber(ROUNDS_AMOUNT, playersNames);
     }
 
     private static boolean shouldContinue(Scanner console) {
