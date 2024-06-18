@@ -3,7 +3,6 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Arrays;
 
 public class Player {
-    public static final int ATTEMPT_MAX = 10;
     public static final int NUMBER_FROM = 1;
     public static final int NUMBER_TO = 100;
     private final String name;
@@ -11,9 +10,9 @@ public class Player {
     private int attempt;
     private int goal;
 
-    public Player(String name) {
+    public Player(String name, int maxAttempt) {
         this.name = name;
-        numbers = new int[ATTEMPT_MAX];
+        numbers = new int[maxAttempt];
     }
 
     public String getName() {

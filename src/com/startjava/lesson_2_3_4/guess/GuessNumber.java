@@ -6,13 +6,14 @@ import java.util.Scanner;
 
 public class GuessNumber {
     private static final int ROUNDS_AMOUNT = 3;
+    public static final int ATTEMPT_MAX = 10;
     private final Player[] players;
 
     public GuessNumber(String... names) {
         int length = names.length;
         players = new Player[length];
         for (int i = 0; i < length; i++) {
-            players[i] = new Player(names[i]);
+            players[i] = new Player(names[i], ATTEMPT_MAX);
         }
     }
 
@@ -20,7 +21,7 @@ public class GuessNumber {
         shufflePlayers();
         System.out.println("\nИгра началась!");
         for (int i = 1; i <= ROUNDS_AMOUNT; i++) {
-            System.out.printf("%nРаунд %d!%nУ каждого игрока по %d попыток.%n%n", i, Player.ATTEMPT_MAX);
+            System.out.printf("%nРаунд %d!%nУ каждого игрока по %d попыток.%n%n", i, ATTEMPT_MAX);
             playRound(scanner);
             printRoundResult();
             reset();
@@ -53,7 +54,7 @@ public class GuessNumber {
     }
 
     private boolean hasAttempts(Player player) {
-        if (player.getAttempt() == ROUNDS_AMOUNT) {
+        if (player.getAttempt() == ATTEMPT_MAX) {
             System.out.printf("У %s закончились попытки!%n", player.getName());
             return false;
         }
