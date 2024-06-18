@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class GuessNumber {
     private static final int ROUNDS_AMOUNT = 3;
-    public static final int ATTEMPT_MAX = 10;
+    private static final int ATTEMPT_MAX = 10;
     private final Player[] players;
 
     public GuessNumber(String... names) {
