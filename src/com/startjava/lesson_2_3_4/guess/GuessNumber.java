@@ -30,13 +30,13 @@ public class GuessNumber {
     }
 
     private void playRound(Scanner scanner) {
-        int secretNum = (int) (Math.random() * Player.NUMBER_TO + Player.NUMBER_FROM);
+        int secretNumber = (int) (Math.random() * Player.NUMBER_TO + Player.NUMBER_FROM);
         for (int i = 0; i < players.length; ) {
             if (!hasAttempts(players[i])) break;
             System.out.printf("Игрок %s введите число от %d до %d: ",
                     players[i].getName(), Player.NUMBER_FROM, Player.NUMBER_TO);
-            inputPlayerNum(players[i], scanner);
-            if (hasGuessed(secretNum, players[i])) break;
+            inputPlayerNumber(players[i], scanner);
+            if (hasGuessed(secretNumber, players[i])) break;
             if (++i == players.length) i = 0;
         }
     }
@@ -60,7 +60,7 @@ public class GuessNumber {
         return true;
     }
 
-    private void inputPlayerNum(Player player, Scanner scanner) {
+    private void inputPlayerNumber(Player player, Scanner scanner) {
         try {
             int inputNum = scanner.nextInt();
             checkDouble(inputNum);
@@ -68,7 +68,7 @@ public class GuessNumber {
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             System.out.print("\nПопробуйте еще раз: ");
-            inputPlayerNum(player, scanner);
+            inputPlayerNumber(player, scanner);
         }
     }
 
@@ -80,16 +80,16 @@ public class GuessNumber {
         }
     }
 
-    private boolean hasGuessed(int secretNum, Player player) {
-        int playerNum = player.getNumbers()[player.getNumbers().length - 1];
-        if (secretNum == playerNum) {
-            System.out.printf("%s угадал число %d с %d-й попытки!%n", player.getName(), secretNum,
+    private boolean hasGuessed(int secretNumber, Player player) {
+        int playerNumber = player.getNumbers()[player.getNumbers().length - 1];
+        if (secretNumber == playerNumber) {
+            System.out.printf("%s угадал число %d с %d-й попытки!%n", player.getName(), secretNumber,
                     player.getNumbers().length);
             player.setGoal(player.getGoal() + 1);
             return true;
         }
         System.out.printf("Число %d %s того, что загадал компьютер%n%n",
-                playerNum, secretNum > playerNum ? "меньше" : "больше");
+                playerNumber, secretNumber > playerNumber ? "меньше" : "больше");
         return false;
     }
 
