@@ -30,6 +30,17 @@ public class GuessNumber {
         resetResult();
     }
 
+    private void shufflePlayers() {
+        for (int i = 1; i < players.length; i++) {
+            int swapTo = players.length - i;
+            int swapFrom = (int) (Math.random() * (swapTo + 1));
+            if (swapFrom == swapTo) continue;
+            Player swap = players[swapFrom];
+            players[swapFrom] = players[swapTo];
+            players[swapTo] = swap;
+        }
+    }
+
     private void playRound(Scanner scanner) {
         int secretNumber = (int) (Math.random() * Player.NUMBER_TO + Player.NUMBER_FROM);
         for (int i = 0; i < players.length; ) {
@@ -39,17 +50,6 @@ public class GuessNumber {
             inputPlayerNumber(players[i], scanner);
             if (hasGuessed(secretNumber, players[i])) break;
             if (++i == players.length) i = 0;
-        }
-    }
-
-    private void shufflePlayers() {
-        for (int i = 1; i < players.length; i++) {
-            int swapTo = players.length - i;
-            int swapFrom = (int) (Math.random() * (swapTo + 1));
-            if (swapFrom == swapTo) continue;
-            Player swap = players[swapFrom];
-            players[swapFrom] = players[swapTo];
-            players[swapTo] = swap;
         }
     }
 
@@ -105,6 +105,12 @@ public class GuessNumber {
         }
     }
 
+    private void reset() {
+        for (Player player : players) {
+            player.clear();
+        }
+    }
+
     private void printResult() {
         System.out.print("\nПо результатам " + ROUNDS_AMOUNT + " раундов: ");
         Arrays.sort(players, Comparator.comparing(Player::getGoal));
@@ -115,12 +121,6 @@ public class GuessNumber {
             System.out.println("Ничья!");
         } else {
             System.out.printf("Победил %s!!!%n", player.getName());
-        }
-    }
-
-    private void reset() {
-        for (Player player : players) {
-            player.clear();
         }
     }
 
