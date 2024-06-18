@@ -1,29 +1,44 @@
 package com.startjava.lesson_2_3_4.guess;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class GuessNumber {
+    private static final int ROUNDS_AMOUNT = 3;
     private final Player[] players;
 
-    public GuessNumber(int roundsAmount, String... names) {
-        players = new Player[names.length];
-        for (int i = 0; i < players.length; i++) {
-            players[i] = new Player(names[i], roundsAmount);
+    public GuessNumber(String... names) {
+        int length = names.length;
+        players = new Player[length];
+        for (int i = 0; i < length; i++) {
+            players[i] = new Player(names[i]);
         }
     }
 
     public void play(Scanner scanner) {
-        int secretNum = (int) (Math.random() * 100 + 1);
         shufflePlayers();
+        System.out.println("\nИгра началась!");
+        for (int i = 1; i <= ROUNDS_AMOUNT; i++) {
+            System.out.printf("%nРаунд %d!%nУ каждого игрока по %d попыток.%n%n", i, Player.ATTEMPT_MAX);
+            playRound(scanner);
+            printRoundResult();
+            reset();
+        }
+        printResult();
+        resetResult();
+    }
+
+    private void playRound(Scanner scanner) {
+        int secretNum = (int) (Math.random() * Player.NUMBER_TO + Player.NUMBER_FROM);
         for (int i = 0; i < players.length; ) {
             if (!hasAttempts(players[i])) break;
-            System.out.printf("Игрок %s введите число от 1 до 100: ", players[i].getName());
+            System.out.printf("Игрок %s введите число от %d до %d: ",
+                    players[i].getName(), Player.NUMBER_FROM, Player.NUMBER_TO);
             inputPlayerNum(players[i], scanner);
             if (hasGuessed(secretNum, players[i])) break;
             if (++i == players.length) i = 0;
         }
-        printResult();
-        reset();
     }
 
     private void shufflePlayers() {
@@ -38,9 +53,8 @@ public class GuessNumber {
     }
 
     private boolean hasAttempts(Player player) {
-        if (player.getAttempts() == 0) {
+        if (player.getAttempt() == ROUNDS_AMOUNT) {
             System.out.printf("У %s закончились попытки!%n", player.getName());
-            System.out.println("Ничья!");
             return false;
         }
         return true;
@@ -52,7 +66,8 @@ public class GuessNumber {
             checkDouble(inputNum);
             player.setNumbers(inputNum);
         } catch (RuntimeException e) {
-            System.out.print("Число должно входить в интервал [1, 100]\nПопробуйте еще раз: ");
+            System.out.println(e.getMessage());
+            System.out.print("\nПопробуйте еще раз: ");
             inputPlayerNum(player, scanner);
         }
     }
@@ -60,7 +75,7 @@ public class GuessNumber {
     private void checkDouble(int inputNum) {
         for (Player player : players) {
             for (int num : player.getNumbers()) {
-                if (num == inputNum) throw new RuntimeException();
+                if (num == inputNum) throw new RuntimeException("Число " + num + " уже вводилось.");
             }
         }
     }
@@ -70,6 +85,7 @@ public class GuessNumber {
         if (secretNum == playerNum) {
             System.out.printf("%s угадал число %d с %d-й попытки!%n", player.getName(), secretNum,
                     player.getNumbers().length);
+            player.setGoal(player.getGoal() + 1);
             return true;
         }
         System.out.printf("Число %d %s того, что загадал компьютер%n%n",
@@ -77,7 +93,7 @@ public class GuessNumber {
         return false;
     }
 
-    private void printResult() {
+    private void printRoundResult() {
         StringBuilder str = new StringBuilder();
         for (Player player : players) {
             for (int number : player.getNumbers()) {
@@ -88,9 +104,28 @@ public class GuessNumber {
         }
     }
 
+    private void printResult() {
+        System.out.print("\nПо результатам " + ROUNDS_AMOUNT + " раундов: ");
+        Arrays.sort(players, Comparator.comparing(Player::getGoal));
+        Player player = players[players.length - 1];
+        if (player.getGoal() == 0) {
+            System.out.println("Общий проигрыш!");
+        } else if (player.getGoal() == players[players.length - 2].getGoal()) {
+            System.out.println("Ничья!");
+        } else {
+            System.out.printf("Победил %s!!!%n", player.getName());
+        }
+    }
+
     private void reset() {
         for (Player player : players) {
-            player.resetPlayer();
+            player.clear();
+        }
+    }
+
+    private void resetResult() {
+        for (Player player : players) {
+            player.setGoal(0);
         }
     }
 }

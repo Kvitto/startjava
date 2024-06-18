@@ -3,14 +3,17 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Arrays;
 
 public class Player {
+    public static final int ATTEMPT_MAX = 10;
+    public static final int NUMBER_FROM = 1;
+    public static final int NUMBER_TO = 100;
     private final String name;
-    private int attempts;
     private final int[] numbers;
+    private int attempt;
+    private int goal;
 
-    public Player(String name, int roundsAmount) {
+    public Player(String name) {
         this.name = name;
-        numbers = new int[roundsAmount];
-        attempts = 0;
+        numbers = new int[ATTEMPT_MAX];
     }
 
     public String getName() {
@@ -18,21 +21,29 @@ public class Player {
     }
 
     public int[] getNumbers() {
-        return Arrays.copyOf(numbers, attempts);
+        return Arrays.copyOf(numbers, attempt);
     }
 
     public void setNumbers(int number) {
-        if (number < 1 || number > 100) throw new RuntimeException();
-        numbers[attempts] = number;
-        attempts++;
+        if (number < NUMBER_FROM || number > NUMBER_TO) throw new RuntimeException("Число должно входить " +
+                "в интервал [" + NUMBER_FROM + ", " + NUMBER_TO + "]");
+        numbers[attempt++] = number;
     }
 
-    public void resetPlayer() {
-        Arrays.fill(numbers, 0, getNumbers().length, 0);
-        attempts = 0;
+    public void clear() {
+        Arrays.fill(numbers, 0, attempt, 0);
+        attempt = 0;
     }
 
-    public int getAttempts() {
-        return numbers.length - attempts;
+    public int getAttempt() {
+        return attempt;
+    }
+
+    public int getGoal() {
+        return goal;
+    }
+
+    public void setGoal(int goal) {
+        this.goal = goal;
     }
 }
