@@ -63,9 +63,9 @@ public class GuessNumber {
 
     private void inputPlayerNumber(Player player, Scanner scanner) {
         try {
-            int inputNum = scanner.nextInt();
-            checkDouble(inputNum);
-            player.setNumbers(inputNum);
+            int inputNumber = scanner.nextInt();
+            checkDouble(inputNumber);
+            player.setNumbers(inputNumber);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             System.out.print("\nПопробуйте еще раз: ");
@@ -73,10 +73,10 @@ public class GuessNumber {
         }
     }
 
-    private void checkDouble(int inputNum) {
+    private void checkDouble(int inputNumber) {
         for (Player player : players) {
             for (int num : player.getNumbers()) {
-                if (num == inputNum) throw new RuntimeException("Число " + num + " уже вводилось.");
+                if (num == inputNumber) throw new RuntimeException("Число " + num + " уже вводилось.");
             }
         }
     }
