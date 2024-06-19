@@ -21,10 +21,19 @@ public class GuessNumberTest {
     private static GuessNumber init(Scanner scanner) {
         String[] playerNames = new String[PLAYERS_AMOUNT];
         for (int i = 0; i < PLAYERS_AMOUNT; i++) {
-            System.out.printf("Введите имя " + (i + 1) + "-го игрока: ");
-            playerNames[i] = scanner.nextLine();
+            playerNames[i] = inputName(scanner, i + 1);
         }
         return new GuessNumber(playerNames);
+    }
+
+    private static String inputName(Scanner scanner, int playerIndex) {
+        System.out.printf("Введите имя " + (playerIndex) + "-го игрока: ");
+        String name = scanner.nextLine();
+        if (name.isBlank()) {
+            System.out.println("У " + (playerIndex) + "-го игрока должно быть имя!");
+            return inputName(scanner, playerIndex);
+        }
+        return name;
     }
 
     private static boolean shouldContinue(Scanner console) {
