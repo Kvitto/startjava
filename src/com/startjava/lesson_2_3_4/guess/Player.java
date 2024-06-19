@@ -3,12 +3,12 @@ package com.startjava.lesson_2_3_4.guess;
 import java.util.Arrays;
 
 public class Player {
-    public static final int NUMBER_FROM = 1;
-    public static final int NUMBER_TO = 100;
+    public static final int START_RANGE = 1;
+    public static final int END_RANGE = 100;
     private final String name;
     private final int[] numbers;
     private int attempt;
-    private int goal;
+    private int wins;
 
     public Player(String name, int maxAttempt) {
         this.name = name;
@@ -23,9 +23,11 @@ public class Player {
         return Arrays.copyOf(numbers, attempt);
     }
 
-    public void setNumbers(int number) {
-        if (number < NUMBER_FROM || number > NUMBER_TO) throw new RuntimeException("Число должно входить " +
-                "в интервал [" + NUMBER_FROM + ", " + NUMBER_TO + "]");
+    public void setNumber(int number) {
+        if (number < START_RANGE || number > END_RANGE) {
+            throw new RuntimeException("Число должно входить " +
+                    "в интервал [" + START_RANGE + ", " + END_RANGE + "]");
+        }
         numbers[attempt++] = number;
     }
 
@@ -38,11 +40,15 @@ public class Player {
         return attempt;
     }
 
-    public int getGoal() {
-        return goal;
+    public int getWins() {
+        return wins;
     }
 
-    public void setGoal(int goal) {
-        this.goal = goal;
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public void incWins() {
+        wins++;
     }
 }
