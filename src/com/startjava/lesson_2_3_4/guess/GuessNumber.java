@@ -66,11 +66,11 @@ public class GuessNumber {
     }
 
     private boolean hasGuessed(Scanner scanner, Player player, int secretNumber) {
-        tryGuess(scanner, player);
-        int playerNumber = player.getNumbers()[player.getNumbers().length - 1];
+        inputNumber(scanner, player);
+        int playerNumber = player.getLastNumber();
         if (secretNumber == playerNumber) {
-            System.out.printf("%s угадал число %d с %d-й попытки!%n", player.getName(), secretNumber,
-                    player.getNumbers().length);
+            System.out.printf("%s угадал число %d с %d-й попытки!%n",
+                    player.getName(), secretNumber, player.getNumbers().length);
             player.incWin();
             return true;
         }
@@ -79,25 +79,16 @@ public class GuessNumber {
         return false;
     }
 
-    private void tryGuess(Scanner scanner, Player player) {
+    private void inputNumber(Scanner scanner, Player player) {
         System.out.printf("Игрок %s введите число от %d до %d: ",
                 player.getName(), Player.START_RANGE, Player.END_RANGE);
         try {
             int inputNumber = scanner.nextInt();
-            checkDouble(inputNumber);
             player.setNumber(inputNumber);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             System.out.println("\nПопробуйте еще раз.");
-            tryGuess(scanner, player);
-        }
-    }
-
-    private void checkDouble(int inputNumber) {
-        for (Player player : players) {
-            for (int number : player.getNumbers()) {
-                if (number == inputNumber) throw new RuntimeException("Число " + number + " уже вводилось.");
-            }
+            inputNumber(scanner, player);
         }
     }
 
