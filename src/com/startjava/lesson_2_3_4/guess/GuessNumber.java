@@ -71,7 +71,7 @@ public class GuessNumber {
         if (secretNumber == playerNumber) {
             System.out.printf("%s угадал число %d с %d-й попытки!%n", player.getName(), secretNumber,
                     player.getNumbers().length);
-            player.incWins();
+            player.incWin();
             return true;
         }
         System.out.printf("Число %d %s того, что загадал компьютер%n%n",
@@ -120,12 +120,12 @@ public class GuessNumber {
 
     private void defineWinner() {
         System.out.print("\nПо результатам " + ROUNDS_AMOUNT + " раундов: ");
-        Arrays.sort(players, Comparator.comparing(Player::getWins));
+        Arrays.sort(players, Comparator.comparing(Player::getWin));
         int length = players.length;
         Player player = players[length - 1];
-        if (player.getWins() == 0) {
+        if (player.getWin() == 0) {
             System.out.println("Все проиграли!");
-        } else if (length > 1 && player.getWins() == players[length - 2].getWins()) {
+        } else if (length > 1 && player.getWin() == players[length - 2].getWin()) {
             System.out.println("Ничья!");
         } else {
             System.out.printf("Победил %s!!!%n", player.getName());
@@ -134,7 +134,7 @@ public class GuessNumber {
 
     private void resetWins() {
         for (Player player : players) {
-            player.setWins(0);
+            player.setWin(0);
         }
     }
 }

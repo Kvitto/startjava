@@ -40,15 +40,15 @@ public class Player {
         return attempt;
     }
 
-    public int getWins() {
+    public int getWin() {
         return wins;
     }
 
-    public void setWins(int wins) {
+    public void setWin(int wins) {
         this.wins = wins;
     }
 
-    public void incWins() {
+    public void incWin() {
         wins++;
     }
 }
