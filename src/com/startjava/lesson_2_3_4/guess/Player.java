@@ -23,7 +23,7 @@ public class Player {
         return Arrays.copyOf(numbers, attempt);
     }
 
-    public void setNumber(int number) {
+    public void addNumber(int number) {
         if (number < START_RANGE || number > END_RANGE) {
             throw new RuntimeException("Число должно входить " +
                     "в интервал [" + START_RANGE + ", " + END_RANGE + "]");
@@ -35,12 +35,12 @@ public class Player {
         return attempt;
     }
 
-    public int getWin() {
+    public int getWins() {
         return wins;
     }
 
-    public void setWin(int wins) {
-        this.wins = wins;
+    public void clearWins() {
+        this.wins = 0;
     }
 
     public void incWin() {

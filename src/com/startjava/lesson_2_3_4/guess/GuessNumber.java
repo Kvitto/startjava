@@ -41,7 +41,7 @@ public class GuessNumber {
     }
 
     private void playRound(Scanner scanner) {
-        int secretNumber = new Random().nextInt(Player.END_RANGE) + Player.START_RANGE;
+        int secretNumber = new Random().nextInt(Player.START_RANGE, Player.END_RANGE + 1);
         int attempts = players.length;
         while (attempts > 0) {
             for (Player player : players) {
@@ -49,7 +49,8 @@ public class GuessNumber {
                     attempts--;
                     continue;
                 }
-                if (hasGuessed(scanner, player, secretNumber)) {
+                inputNumber(scanner, player);
+                if (hasGuessed(player, secretNumber)) {
                     printRoundResult();
                     return;
                 }
@@ -65,8 +66,7 @@ public class GuessNumber {
         return true;
     }
 
-    private boolean hasGuessed(Scanner scanner, Player player, int secretNumber) {
-        inputNumber(scanner, player);
+    private boolean hasGuessed(Player player, int secretNumber) {
         int playerNumber = player.getLastNumber();
         if (secretNumber == playerNumber) {
             System.out.printf("%s угадал число %d с %d-й попытки!%n",
@@ -84,7 +84,7 @@ public class GuessNumber {
                 player.getName(), Player.START_RANGE, Player.END_RANGE);
         try {
             int inputNumber = scanner.nextInt();
-            player.setNumber(inputNumber);
+            player.addNumber(inputNumber);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             System.out.println("\nПопробуйте еще раз.");
@@ -111,21 +111,21 @@ public class GuessNumber {
 
     private void defineWinner() {
         System.out.print("\nПо результатам " + ROUNDS_AMOUNT + " раундов: ");
-        Arrays.sort(players, Comparator.comparing(Player::getWin));
+        Arrays.sort(players, Comparator.comparing(Player::getWins));
         int length = players.length;
-        Player player = players[length - 1];
-        if (player.getWin() == 0) {
+        Player winner = players[length - 1];
+        if (winner.getWins() == 0) {
             System.out.println("Все проиграли!");
-        } else if (length > 1 && player.getWin() == players[length - 2].getWin()) {
+        } else if (length > 1 && winner.getWins() == players[length - 2].getWins()) {
             System.out.println("Ничья!");
         } else {
-            System.out.printf("Победил %s!!!%n", player.getName());
+            System.out.printf("Победил %s!!!%n", winner.getName());
         }
     }
 
     private void resetWins() {
         for (Player player : players) {
-            player.setWin(0);
+            player.clearWins();
         }
     }
 }
