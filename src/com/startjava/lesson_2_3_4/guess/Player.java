@@ -31,6 +31,10 @@ public class Player {
         numbers[attempt++] = number;
     }
 
+    public int getLastNumber() {
+        return numbers[attempt - 1];
+    }
+
     public int getAttempt() {
         return attempt;
     }
@@ -40,7 +44,7 @@ public class Player {
     }
 
     public void clearWins() {
-        this.wins = 0;
+        wins = 0;
     }
 
     public void incWin() {
@@ -50,9 +54,5 @@ public class Player {
     public void clear() {
         Arrays.fill(numbers, 0, attempt, 0);
         attempt = 0;
-    }
-
-    public int getLastNumber() {
-        return numbers[attempt - 1];
     }
 }

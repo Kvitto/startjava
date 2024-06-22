@@ -21,7 +21,7 @@ public class GuessNumber {
         shufflePlayers();
         System.out.println("\nИгра началась!");
         for (int i = 1; i <= ROUNDS_AMOUNT; i++) {
-            System.out.printf("%nРаунд %d!%nУ каждого игрока по %d попыток.%n%n", i, ATTEMPTS_LIMIT);
+            System.out.printf("%nРаунд %d!%nУ каждого игрока по %d попыток.%n", i, ATTEMPTS_LIMIT);
             playRound(scanner);
             reset();
         }
@@ -45,17 +45,17 @@ public class GuessNumber {
         int attempts = players.length;
         while (attempts > 0) {
             for (Player player : players) {
-                if (!hasAttempts(player)) {
-                    attempts--;
-                    continue;
-                }
                 inputNumber(scanner, player);
                 if (hasGuessed(player, secretNumber)) {
-                    printRoundResult();
-                    return;
+                    attempts = 0;
+                    break;
+                }
+                if (!hasAttempts(player)) {
+                    attempts--;
                 }
             }
         }
+        printRoundResult();
     }
 
     private boolean hasAttempts(Player player) {
@@ -74,13 +74,13 @@ public class GuessNumber {
             player.incWin();
             return true;
         }
-        System.out.printf("Число %d %s того, что загадал компьютер%n%n",
+        System.out.printf("Число %d %s того, что загадал компьютер%n",
                 playerNumber, secretNumber > playerNumber ? "меньше" : "больше");
         return false;
     }
 
     private void inputNumber(Scanner scanner, Player player) {
-        System.out.printf("Игрок %s введите число от %d до %d: ",
+        System.out.printf("%nИгрок %s введите число от %d до %d: ",
                 player.getName(), Player.START_RANGE, Player.END_RANGE);
         try {
             int inputNumber = scanner.nextInt();
@@ -94,6 +94,7 @@ public class GuessNumber {
 
     private void printRoundResult() {
         StringBuilder lineNumbers = new StringBuilder();
+        System.out.println("\nЧисла игроков:");
         for (Player player : players) {
             for (int number : player.getNumbers()) {
                 lineNumbers.append(number).append(" ");
