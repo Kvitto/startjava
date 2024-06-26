@@ -4,38 +4,54 @@ import java.util.Arrays;
 
 public class Bookshelf {
     public static final int BOOKSHELF_SIZE = 10;
-    private int bookQty;
+    private int bookAmount;
     private final Book[] books = new Book[BOOKSHELF_SIZE];
 
     public Book[] getBooks() {
         return books;
     }
 
-    // выводить количество всех книг (перед выводом шкафа)
-    public int getBookQty() {
-        return bookQty;
+    public int getBookAmount() {
+        return bookAmount;
     }
 
-    //сохранить книгу
-    public void addBook(Book book) {
-        books[bookQty++] = book;
+    public void add(Book book) {
+        books[bookAmount++] = book;
     }
 
-    //удалять по названию
-
-    //искать по названию
-
-    //выводить количество свободных полок (перед выводом шкафа)
-    public int freeShelfQty() {
-        return BOOKSHELF_SIZE - bookQty;
+    public void delete(Book book) {
+        if (book == null) return;
+        int index = indexBook(book);
+        System.arraycopy(books, index + 1, books, index, bookAmount - index);
+        books[--bookAmount] = null;
     }
 
-    //выводить все книги (только для визуализации шкафа)
+    public Book find(String title) {
+        for (Book book : books) {
+            if (book == null) {
+                break;
+            }
+            if (title.equals(book.getTitle())) {
+                return book;
+            }
+        }
+        return null;
+    }
 
+    public int availableShelves() {
+        return BOOKSHELF_SIZE - bookAmount;
+    }
 
-    //очищать шкаф от книг
-    public void clearBookshelf() {
-        Arrays.fill(books, 0, bookQty, null);
-        bookQty = 0;
+    public void clear() {
+        Arrays.fill(books, 0, bookAmount, null);
+        bookAmount = 0;
+    }
+
+    private int indexBook(Book book) {
+        for (int i = 0; i < BOOKSHELF_SIZE; i++) {
+            if (books[i] == null) break;
+            if (book.equals(books[i])) return i;
+        }
+        return -1;
     }
 }
