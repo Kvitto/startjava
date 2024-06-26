@@ -24,7 +24,7 @@ public class BookshelfTest {
         bookshelf = new Bookshelf();
         do {
             try {
-                shelfView();
+                showShelf();
                 System.out.print(MENU);
                 chooseAction(console);
                 System.out.println("\nДля продолжения работы нажмите клавишу <Enter>");
@@ -36,16 +36,21 @@ public class BookshelfTest {
         console.close();
     }
 
-    private static void shelfView() {
-        if (bookshelf.getBookAmount() == 0) {
-            System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
+    private static void showShelf() {
+        if (bookshelf.getBookAmount() > 0) {
+            System.out.printf("В шкафу книг - %d, свободно полок - %d%n%n",
+                    bookshelf.getBookAmount(), bookshelf.availableShelves());
+            showBooks();
             return;
         }
-        System.out.printf("В шкафу книг - %d, свободно полок - %d%n%n",
-                bookshelf.getBookAmount(), bookshelf.availableShelves());
+        System.out.println("\nШкаф пуст. Вы можете добавить в него первую книгу");
+    }
+
+    private static void showBooks() {
         for (Book book : bookshelf.getBooks()) {
             if (book == null) break;
-            System.out.println(book);
+            System.out.println("|" + book + " ".repeat(bookshelf.getLength() - book.getInfo()) + "|");
+            System.out.println("|" + "-".repeat(bookshelf.getLength()) + "|");
         }
     }
 
@@ -74,43 +79,43 @@ public class BookshelfTest {
     }
 
     private static void findBook(Scanner console) {
-        System.out.println("Поиск...");
+        System.out.println("\nПоиск...");
         String title = inputText(console, "название книги");
         Book book = bookshelf.find(title);
         if (book == null) {
             System.out.println("Книга \"" + title + "\" не найдена!");
-        } else {
-            System.out.println(book);
+            return;
         }
+        System.out.println(book);
     }
 
     private static void addBook(Scanner console) {
-        if (bookshelf.availableShelves() == 0) {
-            System.out.println("Ошибка: В шкафу нет места!");
+        if (bookshelf.availableShelves() > 0) {
+            System.out.println("\nНовая кника...");
+            String title = inputText(console, "название книги");
+            String author = inputText(console, "автор книги");
+            int published = inputNumber(console, "год издания");
+            bookshelf.add(new Book(author, title, published));
+            System.out.println("книга добавлена!");
             return;
         }
-        System.out.println("\nНовая кника...");
-        String title = inputText(console, "название книги");
-        String author = inputText(console, "автор книги");
-        int published = inputNumber(console, "год издания");
-        bookshelf.add(new Book(author, title, published));
-        System.out.println("книга добавлена!");
+        System.out.println("Ошибка: В шкафу нет места!");
     }
 
     private static void deleteBook(Scanner console) {
-        System.out.println("Удаление...");
-        if (bookshelf.getBookAmount() == 0) {
-            System.out.println("Шкаф пуст!");
+        if (bookshelf.getBookAmount() > 0) {
+            System.out.println("\nУдаление...");
+            String title = inputText(console, "название книги");
+            Book book = bookshelf.find(title);
+            if (book != null) {
+                bookshelf.delete(book);
+                System.out.println("Книга \"" + title + "\" удалена!");
+                return;
+            }
+            System.out.println("Книга \"" + title + "\" не найдена!");
             return;
         }
-        String title = inputText(console, "название книги");
-        Book book = bookshelf.find(title);
-        if (book == null) {
-            System.out.println("Книга \"" + title + "\" не найдена!");
-        } else {
-            bookshelf.delete(book);
-            System.out.println("Книга \"" + title + "\" удалена!");
-        }
+        System.out.println("Шкаф пуст!");
     }
 
     private static void clearBookshelf(Scanner console) {
@@ -135,11 +140,9 @@ public class BookshelfTest {
     private static String inputText(Scanner console, String title) {
         System.out.print("Введите " + title + ": ");
         String text = console.nextLine();
-        if (text.isBlank()) {
-            System.out.println("Ошибка: " + title + " не может быть пустым!");
-            return inputText(console, title);
-        }
-        return text;
+        if (!text.isBlank()) return text;
+        System.out.println("Ошибка: " + title + " не может быть пустым!");
+        return inputText(console, title);
     }
 
     private static int inputNumber(Scanner console, String title) {

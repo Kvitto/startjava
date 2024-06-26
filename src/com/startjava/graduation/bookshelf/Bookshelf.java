@@ -4,27 +4,9 @@ import java.util.Arrays;
 
 public class Bookshelf {
     public static final int BOOKSHELF_SIZE = 10;
-    private int bookAmount;
     private final Book[] books = new Book[BOOKSHELF_SIZE];
-
-    public Book[] getBooks() {
-        return books;
-    }
-
-    public int getBookAmount() {
-        return bookAmount;
-    }
-
-    public void add(Book book) {
-        books[bookAmount++] = book;
-    }
-
-    public void delete(Book book) {
-        if (book == null) return;
-        int index = indexBook(book);
-        System.arraycopy(books, index + 1, books, index, bookAmount - index);
-        books[--bookAmount] = null;
-    }
+    private int bookAmount;
+    private int length;
 
     public Book find(String title) {
         for (Book book : books) {
@@ -38,8 +20,17 @@ public class Bookshelf {
         return null;
     }
 
-    public int availableShelves() {
-        return BOOKSHELF_SIZE - bookAmount;
+    public void add(Book book) {
+        books[bookAmount++] = book;
+        if (book.getInfo() > length) length = book.getInfo();
+    }
+
+    public void delete(Book book) {
+        if (book == null) return;
+        int index = indexBook(book);
+        System.arraycopy(books, index + 1, books, index, bookAmount - index);
+        books[--bookAmount] = null;
+        if (book.getInfo() == length) refreshInfo();
     }
 
     public void clear() {
@@ -47,11 +38,35 @@ public class Bookshelf {
         bookAmount = 0;
     }
 
+    public Book[] getBooks() {
+        return books;
+    }
+
+    public int getBookAmount() {
+        return bookAmount;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int availableShelves() {
+        return BOOKSHELF_SIZE - bookAmount;
+    }
+
     private int indexBook(Book book) {
         for (int i = 0; i < BOOKSHELF_SIZE; i++) {
             if (books[i] == null) break;
             if (book.equals(books[i])) return i;
         }
-        return -1;
+        throw new RuntimeException("Ошибка: в шкафу такой книги \"" + book.getTitle() + "\" нет!");
+    }
+
+    private void refreshInfo() {
+        length = 0;
+        for (Book book : books) {
+            if (book == null) return;
+            if (book.getInfo() > length) length = book.getInfo();
+        }
     }
 }
