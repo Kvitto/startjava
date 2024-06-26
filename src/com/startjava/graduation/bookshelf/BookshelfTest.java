@@ -39,7 +39,7 @@ public class BookshelfTest {
                 bookshelf.getBookQty(), bookshelf.freeShelfQty());
         for (Book book : bookshelf.getBooks()) {
             if (book == null) break;
-            System.out.println(book.toString());
+            System.out.println(book);
         }
     }
 
@@ -64,9 +64,7 @@ public class BookshelfTest {
         }
         console.nextLine();
         switch (choise) {
-            case 1 -> {
-                return;
-            }
+            case 1 -> findBook(console);
             case 2 -> addBook(console);
             case 3 -> deleteBook();
             case 4 -> bookshelf.clearBookshelf();
@@ -75,17 +73,25 @@ public class BookshelfTest {
         }
     }
 
-    private static void deleteBook() {
-        System.out.println("bookDelete");
+    private static void findBook(Scanner console) {
+        return;
     }
 
     private static void addBook(Scanner console) {
+        if (bookshelf.freeShelfQty() == 0) {
+            System.out.println("Ошибка: В шкафу нет места!");
+            return;
+        }
         System.out.println("\nНовая кника...");
         String title = inputText(console, "Название книги");
         String author = inputText(console, "Автор книги");
         int published = inputNumber(console, "Год издания");
         bookshelf.addBook(new Book(author, title, published));
         System.out.println("книга добавлена!");
+    }
+
+    private static void deleteBook() {
+        System.out.println("bookDelete");
     }
 
     private static String inputText(Scanner console, String title) {

@@ -3,7 +3,7 @@ package com.startjava.graduation.bookshelf;
 import java.util.Arrays;
 
 public class Bookshelf {
-    private static final int BOOKSHELF_SIZE = 10;
+    public static final int BOOKSHELF_SIZE = 10;
     private int bookQty;
     private final Book[] books = new Book[BOOKSHELF_SIZE];
 
@@ -18,7 +18,6 @@ public class Bookshelf {
 
     //сохранить книгу
     public void addBook(Book book) {
-        if (bookQty >= BOOKSHELF_SIZE) throw new RuntimeException("Ошибка: В шкафу нет места!");
         books[bookQty++] = book;
     }
 
