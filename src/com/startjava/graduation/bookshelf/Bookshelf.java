@@ -8,6 +8,18 @@ public class Bookshelf {
     private int bookAmount;
     private int length;
 
+    public Book[] getBooks() {
+        return books;
+    }
+
+    public int getBookAmount() {
+        return bookAmount;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
     public Book find(String title) {
         for (Book book : books) {
             if (book == null) {
@@ -36,18 +48,6 @@ public class Bookshelf {
     public void clear() {
         Arrays.fill(books, 0, bookAmount, null);
         bookAmount = 0;
-    }
-
-    public Book[] getBooks() {
-        return books;
-    }
-
-    public int getBookAmount() {
-        return bookAmount;
-    }
-
-    public int getLength() {
-        return length;
     }
 
     public int availableShelves() {

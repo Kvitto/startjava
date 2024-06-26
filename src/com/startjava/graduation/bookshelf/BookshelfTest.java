@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BookshelfTest {
-    public static final String MENU = """
+    private static final String MENU = """
             
             ========== МЕНЮ ==========
             1. Найти книгу
