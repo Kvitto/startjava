@@ -27,8 +27,8 @@ public class Bookshelf {
 
     public void delete(Book book) {
         if (book == null) return;
-        int index = indexBook(book);
-        System.arraycopy(books, index + 1, books, index, bookAmount - index);
+        int index = indexBook(book) + 1;
+        System.arraycopy(books, index, books, index - 1, bookAmount - index);
         books[--bookAmount] = null;
         if (book.getInfo() == length) refreshInfo();
     }
