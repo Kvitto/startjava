@@ -22,12 +22,8 @@ public class Bookshelf {
 
     public Book find(String title) {
         for (Book book : books) {
-            if (book == null) {
-                break;
-            }
-            if (title.equals(book.getTitle())) {
-                return book;
-            }
+            if (book == null) break;
+            if (book.getTitle().equals(title)) return book;
         }
         return null;
     }
