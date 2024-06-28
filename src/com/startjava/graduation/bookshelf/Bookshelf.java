@@ -3,13 +3,13 @@ package com.startjava.graduation.bookshelf;
 import java.util.Arrays;
 
 public class Bookshelf {
-    public static final int BOOKSHELF_SIZE = 10;
-    private final Book[] books = new Book[BOOKSHELF_SIZE];
+    private static final int CAPACITY = 10;
+    private final Book[] books = new Book[CAPACITY];
     private int bookAmount;
     private int length;
 
     public Book[] getBooks() {
-        return books;
+        return Arrays.copyOf(books, bookAmount);
     }
 
     public int getBookAmount() {
@@ -21,24 +21,28 @@ public class Bookshelf {
     }
 
     public Book find(String title) {
-        for (Book book : books) {
-            if (book == null) break;
+        if (bookAmount == 0) throw new RuntimeException("Шкаф пуст!");
+        for (Book book : getBooks()) {
             if (book.getTitle().equals(title)) return book;
         }
-        return null;
+        throw new RuntimeException("В шкафу нет книги: - \"" + title + "\"!");
     }
 
     public void add(Book book) {
-        books[bookAmount++] = book;
-        if (book.getInfo() > length) length = book.getInfo();
+        if (availableShelves() > 0) {
+            books[bookAmount++] = book;
+            if (book.getLengthInfo() > length) length = book.getLengthInfo();
+            return;
+        }
+        throw new RuntimeException("В шкафу нет места!");
     }
 
-    public void delete(Book book) {
-        if (book == null) return;
-        int index = indexBook(book) + 1;
+    public void delete(String title) {
+        Book book = find(title);
+        int index = getIndex(book) + 1;
         System.arraycopy(books, index, books, index - 1, bookAmount - index);
         books[--bookAmount] = null;
-        if (book.getInfo() == length) refreshInfo();
+        if (book.getLengthInfo() == length) refreshInfo();
     }
 
     public void clear() {
@@ -47,22 +51,21 @@ public class Bookshelf {
     }
 
     public int availableShelves() {
-        return BOOKSHELF_SIZE - bookAmount;
+        return CAPACITY - bookAmount;
     }
 
-    private int indexBook(Book book) {
-        for (int i = 0; i < BOOKSHELF_SIZE; i++) {
-            if (books[i] == null) break;
+    private int getIndex(Book book) {
+        Book[] books = getBooks();
+        for (int i = 0; i < books.length; i++) {
             if (book.equals(books[i])) return i;
         }
-        throw new RuntimeException("Ошибка: в шкафу такой книги \"" + book.getTitle() + "\" нет!");
+        throw new RuntimeException("Книга \"" + book.getTitle() + "\" отсутствует!");
     }
 
     private void refreshInfo() {
         length = 0;
-        for (Book book : books) {
-            if (book == null) return;
-            if (book.getInfo() > length) length = book.getInfo();
+        for (Book book : getBooks()) {
+            if (book.getLengthInfo() > length) length = book.getLengthInfo();
         }
     }
 }
