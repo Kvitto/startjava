@@ -23,12 +23,12 @@ public class BookshelfTest {
         Scanner console = new Scanner(System.in);
         bookshelf = new Bookshelf();
         do {
-            showShelf();
+            showBookshelf();
             System.out.print(MENU);
             try {
                 chooseAction(console);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("\nКнига не найдена!");
             }
             System.out.println("\nДля продолжения работы нажмите клавишу <Enter>");
             console.nextLine();
@@ -36,7 +36,7 @@ public class BookshelfTest {
         console.close();
     }
 
-    private static void showShelf() {
+    private static void showBookshelf() {
         if (bookshelf.getBookAmount() > 0) {
             System.out.printf("В шкафу книг - %d, свободно полок - %d%n%n",
                     bookshelf.getBookAmount(), bookshelf.availableShelves());
@@ -48,7 +48,7 @@ public class BookshelfTest {
 
     private static void showBooks() {
         for (Book book : bookshelf.getBooks()) {
-            System.out.println("|" + book + " ".repeat(bookshelf.getLength() - book.getLengthInfo()) + "|");
+            System.out.println("|" + book + " ".repeat(bookshelf.getLength() - book.getInfoLength()) + "|");
             System.out.println("|" + "-".repeat(bookshelf.getLength()) + "|");
         }
     }
@@ -80,8 +80,7 @@ public class BookshelfTest {
     private static void findBook(Scanner console) {
         System.out.println("\nПоиск...");
         String title = inputText(console, "название книги");
-        Book book = bookshelf.find(title);
-        System.out.println(book);
+        System.out.println(bookshelf.find(title));
     }
 
     private static void addBook(Scanner console) {
@@ -89,8 +88,11 @@ public class BookshelfTest {
         String title = inputText(console, "название книги");
         String author = inputText(console, "автор книги");
         int published = inputNumber(console, "год издания");
-        bookshelf.add(new Book(author, title, published));
-        System.out.println("книга \"" + title + "\" добавлена!");
+        if (bookshelf.add(new Book(author, title, published))) {
+            System.out.println("книга \"" + title + "\" добавлена!");
+        } else {
+            System.out.println("\nВ шкафу нет места!");
+        }
     }
 
     private static void deleteBook(Scanner console) {

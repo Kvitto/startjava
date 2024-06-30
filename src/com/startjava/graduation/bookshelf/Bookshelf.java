@@ -5,15 +5,15 @@ import java.util.Arrays;
 public class Bookshelf {
     private static final int CAPACITY = 10;
     private final Book[] books = new Book[CAPACITY];
-    private int bookAmount;
+    private int booksAmount;
     private int length;
 
     public Book[] getBooks() {
-        return Arrays.copyOf(books, bookAmount);
+        return Arrays.copyOf(books, booksAmount);
     }
 
     public int getBookAmount() {
-        return bookAmount;
+        return booksAmount;
     }
 
     public int getLength() {
@@ -21,51 +21,47 @@ public class Bookshelf {
     }
 
     public Book find(String title) {
-        if (bookAmount == 0) throw new RuntimeException("Шкаф пуст!");
-        for (Book book : getBooks()) {
-            if (book.getTitle().equals(title)) return book;
-        }
-        throw new RuntimeException("В шкафу нет книги: - \"" + title + "\"!");
+        return books[findIndex(title)];
     }
 
-    public void add(Book book) {
+    public boolean add(Book book) {
         if (availableShelves() > 0) {
-            books[bookAmount++] = book;
-            if (book.getLengthInfo() > length) length = book.getLengthInfo();
-            return;
+            books[booksAmount++] = book;
+            if (book.getInfoLength() > length) length = book.getInfoLength();
+            return true;
         }
-        throw new RuntimeException("В шкафу нет места!");
+        return false;
     }
 
     public void delete(String title) {
-        Book book = find(title);
-        int index = getIndex(book) + 1;
-        System.arraycopy(books, index, books, index - 1, bookAmount - index);
-        books[--bookAmount] = null;
-        if (book.getLengthInfo() == length) refreshInfo();
+        int index = findIndex(title);
+        int bookInfoLength = books[index].getInfoLength();
+        System.arraycopy(books, index + 1, books, index, booksAmount - index - 1);
+        books[--booksAmount] = null;
+        if (bookInfoLength == length) refreshInfo();
     }
 
     public void clear() {
-        Arrays.fill(books, 0, bookAmount, null);
-        bookAmount = 0;
+        Arrays.fill(books, 0, booksAmount, null);
+        booksAmount = 0;
     }
 
     public int availableShelves() {
-        return CAPACITY - bookAmount;
+        return CAPACITY - booksAmount;
     }
 
-    private int getIndex(Book book) {
-        Book[] books = getBooks();
+    private int findIndex(String title) {
         for (int i = 0; i < books.length; i++) {
-            if (book.equals(books[i])) return i;
+            if (books[i] == null) break;
+            if (books[i].getTitle().equals(title)) return i;
         }
-        throw new RuntimeException("Книга \"" + book.getTitle() + "\" отсутствует!");
+        return books.length;
     }
 
     private void refreshInfo() {
         length = 0;
         for (Book book : getBooks()) {
-            if (book.getLengthInfo() > length) length = book.getLengthInfo();
+            if (book.getInfoLength() > length) length = book.getInfoLength();
         }
     }
 }
