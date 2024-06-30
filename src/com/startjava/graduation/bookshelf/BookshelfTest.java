@@ -73,7 +73,9 @@ public class BookshelfTest {
         try {
             return console.nextInt();
         } catch (InputMismatchException e) {
-            return 0;
+            System.out.print("Ошибка: некорректное значение! Попробуйте еще раз: ");
+            console.nextLine();
+            return inputAction(console);
         }
     }
 
