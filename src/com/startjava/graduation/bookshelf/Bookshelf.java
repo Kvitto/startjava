@@ -21,7 +21,9 @@ public class Bookshelf {
     }
 
     public Book find(String title) {
-        return books[findIndex(title)];
+        int index = findIndex(title);
+        if (index < 0) return null;
+        return books[index];
     }
 
     public boolean add(Book book) {
@@ -33,12 +35,14 @@ public class Bookshelf {
         return false;
     }
 
-    public void delete(String title) {
+    public boolean delete(String title) {
         int index = findIndex(title);
+        if (index < 0) return false;
         int bookInfoLength = books[index].getInfoLength();
         System.arraycopy(books, index + 1, books, index, booksAmount - index - 1);
         books[--booksAmount] = null;
-        if (bookInfoLength == length) refreshInfo();
+        if (bookInfoLength == length) refreshLength();
+        return true;
     }
 
     public void clear() {
@@ -55,10 +59,10 @@ public class Bookshelf {
             if (books[i] == null) break;
             if (books[i].getTitle().equals(title)) return i;
         }
-        return books.length;
+        return -1;
     }
 
-    private void refreshInfo() {
+    private void refreshLength() {
         length = 0;
         for (Book book : getBooks()) {
             if (book.getInfoLength() > length) length = book.getInfoLength();

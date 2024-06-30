@@ -27,8 +27,8 @@ public class BookshelfTest {
             System.out.print(MENU);
             try {
                 chooseAction(console);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("\nКнига не найдена!");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
             System.out.println("\nДля продолжения работы нажмите клавишу <Enter>");
             console.nextLine();
@@ -82,7 +82,12 @@ public class BookshelfTest {
     private static void findBook(Scanner console) {
         System.out.println("\nПоиск...");
         String title = inputText(console, "название книги");
-        System.out.println(bookshelf.find(title));
+        Book book = bookshelf.find(title);
+        if (book == null) {
+            System.out.println("\nКнига не найдена!");
+            return;
+        }
+        System.out.println(book);
     }
 
     private static void addBook(Scanner console) {
@@ -92,16 +97,19 @@ public class BookshelfTest {
         int published = inputNumber(console, "год издания");
         if (bookshelf.add(new Book(author, title, published))) {
             System.out.println("книга \"" + title + "\" добавлена!");
-        } else {
-            System.out.println("\nВ шкафу нет места!");
+            return;
         }
+        System.out.println("\nВ шкафу нет места!");
     }
 
     private static void deleteBook(Scanner console) {
         System.out.println("\nУдаление...");
         String title = inputText(console, "название книги");
-        bookshelf.delete(title);
-        System.out.println("Книга \"" + title + "\" удалена!");
+        if (bookshelf.delete(title)) {
+            System.out.println("Книга \"" + title + "\" удалена!");
+            return;
+        }
+        System.out.println("\nКнига не найдена!");
     }
 
     private static void clearBookshelf(Scanner console) {
