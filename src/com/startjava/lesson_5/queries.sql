@@ -25,15 +25,17 @@
  SELECT *
    FROM jaegers
   WHERE launch IN
-        (SELECT MIN(launch) FROM Jaegers)
-        ORDER BY model_name;
+        (SELECT MIN(launch)
+           FROM Jaegers)
+                ORDER BY model_name;
 
 \echo 'Вывод информации из столбцов model_name, mark, launch, kaiju_kill тех роботов, которые уничтожили больше всех kaiju:'
  SELECT model_name, mark, launch, kaiju_kill
    FROM jaegers
   WHERE kaiju_kill IN
-        (SELECT MAX(kaiju_kill) FROM Jaegers)
-        ORDER BY model_name;
+        (SELECT MAX(kaiju_kill)
+           FROM Jaegers)
+                ORDER BY model_name;
 
 \echo 'Вывод среднего веса роботов, округлив его до трех знаков после запятой:'
  SELECT round(AVG(weight), 3)
