@@ -1,5 +1,4 @@
 \! chcp 1251
---echo-all
 \c robots
   
 DROP TABLE IF EXISTS jaegers;
