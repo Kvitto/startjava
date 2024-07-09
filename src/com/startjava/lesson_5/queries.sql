@@ -38,7 +38,7 @@ SELECT model_name, mark, launch, kaiju_kill
  ORDER BY model_name;
 
 \echo 'Вывод среднего веса роботов, округлив его до трех знаков после запятой:'
-SELECT ROUND(AVG(weight), 3)
+SELECT ROUND(AVG(weight), 3) avg_weight
   FROM jaegers;
 
 \echo 'Увеличение на единицу количество уничтоженных kaiju у неразрушенных роботов, а затем вывод таблицы.'
